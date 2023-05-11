@@ -116,6 +116,72 @@ body {
   }
 
   .direct-input {
-    margin-top: 400px;
-    background-color: lightpink;
+    margin-top: 100px;
+    background-color: red;
+    width: 400px;
   }
+
+
+  body{
+    background-image: url("/image/rwanda_story.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    padding: 30px;
+    
+  }
+
+  .title-bar{
+    font-size: 60px;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .title-box{
+    height: 200px;
+    position: relative;
+    background-image: url("/image/header.png");
+  }
+
+  .main-content{
+    background-color: rgba(255, 255, 255, 0.5); 
+  }
+
+  .hsum{
+    color: #1FB264;
+    margin-left: 20px;
+    
+  }
+  .in-sum{
+    color:#c13b2a;
+    margin-left: 20px;
+  }
+
+  .now{
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .status-box{
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: bold;
+    color: green;
+    font-size: 40px;
+  }
+
+  .status-summary{
+    font-size: 20px;
+    width: 500px;
+    background-color: aliceblue;
+    font-weight: bold;
+    text-align: left;
+  }
+

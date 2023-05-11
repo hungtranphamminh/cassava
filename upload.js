@@ -1,4 +1,63 @@
 
+//get data from camera
+let data = [
+  {
+    "status":"healthy",
+    "prob":0.9
+  },
+  {
+    "status":"healthy",
+    "prob":0.7
+  },
+  {
+    "status":"healthy",
+    "prob":0.6
+  },
+  {
+    "status":"infected",
+    "prob":0.7
+  },
+  {
+    "status":"healthy",
+    "prob":0.3
+  }
+] 
+console.log(data)
+
+
+function showstatus(data){
+  var healthycount = 0;
+
+  var infected = 0;
+  data.forEach(element => {
+    //console.log(element)   
+    if (element.status==="healthy")
+        healthycount+=1;
+    else{
+      infected+=1;
+    }    
+  });
+  console.log(healthycount)
+  if (healthycount!==0){
+    document.getElementById("hsum").innerText=`${healthycount} ${healthycount>1?" sections are ":"section is "} healthy `;
+  }
+  if (infected!==0){
+    document.getElementById("in-sum").innerText=`${infected} ${infected>1?" sections are ":"section is "} infected `;
+  }
+
+  var currentdate = new Date(); 
+  var datetime = "Latest Record On " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+  
+  document.getElementById("now").innerText=datetime
+
+}
+
+showstatus(data)
 
 
 
