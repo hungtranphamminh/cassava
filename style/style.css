@@ -128,6 +128,7 @@ body {
     background-size: cover;
     height: 500px;
     padding: 30px;
+    background-attachment: fixed;
     
   }
 
@@ -141,47 +142,115 @@ body {
   }
 
   .title-box{
+    position: static;
+    top: 0;
+    left: 0;
+
     height: 200px;
+    
     position: relative;
     background-image: url("/image/header.png");
   }
 
   .main-content{
     background-color: rgba(255, 255, 255, 0.5); 
+    padding: 0;
+    margin: 0;
   }
 
   .hsum{
     color: #1FB264;
-    margin-left: 20px;
+
     
   }
   .in-sum{
     color:#c13b2a;
-    margin-left: 20px;
+
   }
 
-  .now{
-    margin-bottom: 30px;
-    text-align: center;
+  
+  .status{
+    margin: 80px;
+    /* background-color: white; */
+    border-radius: 10px;
   }
   .status-box{
-    margin: 10px;
     background-color: white;
-    border-radius: 10px;
+    margin-left: 50px;
     padding: 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     text-align: center;
     font-weight: bold;
     color: green;
     font-size: 40px;
+    height: 400px;
   }
 
   .status-summary{
+    border:#1FB264 solid;
+    margin: 30px;
     font-size: 20px;
     width: 500px;
-    background-color: aliceblue;
+    padding-top: 70px;
+    background-color: white;
     font-weight: bold;
     text-align: left;
+    height: 300px;
+    border-radius: 20px;
+    
   }
+  .chart-summary{
+    border:#1FB264 solid;
+    margin: 30px;
+    border-radius: 20px;
+    
+    /* background-color: aliceblue; */
+  }
+  .summary-title{
+    background-color: #15824B;
+    margin: 40px;
+    margin-left: 90px;
+    padding: 30px;
+    text-align: center;
+    /* color: #1AA059; */
+    color: white;
+    font-weight: bolder;
+    font-size: 40px;
+    border-radius: 10px;
+
+  }
+
+  #total{
+    
+    text-align: center;
+  }
+  .now{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .hsum,.in-sum{
+    text-align: center;
+    margin-top: 30px;
+    
+  }
+
+  .detail{
+    background-color: white;
+    height: 900px;
+    margin: 40px;
+    border-radius: 10px;
+  }
+  .detail-title{
+    padding:40px;
+    text-align: center;
+    margin: 40px;
+    font-size: 40px;
+    font-weight: bolder;
+    color: #15824B;
+  }
+
 

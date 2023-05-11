@@ -2,8 +2,13 @@
 <html>
     <head>
         <title>Disease Classification</title>
-        <link rel="stylesheet" href="/style/style.css">
+        <!-- Step 1 - Include the fusioncharts core library -->
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+        <!-- Step 2 - Include the fusion theme -->
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
         
+        
+        <link rel="stylesheet" href="/style/style.css">
     </head>
     <body>
         <div class="main-content">
@@ -12,18 +17,30 @@
                     Cassava Disease Classification System
                 </div>
             </div>
-            
-            <div class="status-box">Brief Summary of All Sections
-                <div class="status-summary">
-                    <div id="now" class="now"></div>
-                    <div id="hsum" class="hsum"></div>
-                    <div id="dan-sum" class="dan-sum">
+            <div class="status">
+                <div class="summary-title">Brief Summary of All Sections</div>
+                <div class="status-box">
+                    <div class="status-summary">
+                        <div id="now" class="now"></div>
+                        <div id="total"></div>
+                        <div id="hsum" class="hsum"></div>
+                        <div id="in-sum" class="in-sum">
+                        </div>
+                    </div> 
+                    <div class="chart-summary" style="height: 370px; width: 50%;" id="chartContainer">
                     </div>
-                    <div id="in-sum" class="in-sum">
-                    </div>
-                </div> 
+                </div>
+            </div>
+
+            <div class="detail">
+                <div class="detail-title">
+                    Detailed Information of All Sections
+                </div>
             </div>
             
+            <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+
             <script src="upload.js"></script>
 
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
