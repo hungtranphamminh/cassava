@@ -5,55 +5,55 @@ let data = [
     "status":"healthy",
     "prob":0.9,
     "src":"/image/test.jpg",
-    "sec":1
+    "sec":"1"
   },
   {
     "status":"healthy",
     "prob":0.7,
     "src":"/image/test.jpg",
-    "sec":2
+    "sec":"2"
   },
   {
     "status":"healthy",
     "prob":0.6,
     "src":"/image/test.jpg",
-    "sec":3
+    "sec":"3"
   },
   {
     "status":"infected",
     "prob":0.7,
     "src":"/image/test.jpg",
-    "sec":4
+    "sec":"4"
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":5
+    "sec":"5"
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":6
+    "sec":"6"
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":7
+    "sec":"7"
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":8
+    "sec":"8"
   },
   {
     "status":"a",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":9
+    "sec":"9"
   },
   {
     "status":"b",
@@ -61,12 +61,12 @@ let data = [
     "src":"/image/test.jpg",
     "sec":10
   },
-  {
-    "status":"c",
-    "prob":0.3,
-    "src":"/image/test.jpg",
-    "sec":11
-  },
+  // {
+  //   "status":"c",
+  //   "prob":0.3,
+  //   "src":"/image/test.jpg",
+  //   "sec":11
+  // },
   {
     "status":"d",
     "prob":0.3,
@@ -215,9 +215,11 @@ function updatehealthy(){
 
   hdata.forEach(element=>{
     console.log(element)
+    let sid=element.sec.toString()
+    console.log(sid)
     document.getElementById("hl2").innerHTML+=`
       <div class="img-block">
-        <img src=${element.src} class="s-img">
+        <img id=${sid} src=${element.src} class="s-img">
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
@@ -271,7 +273,7 @@ function updated(){
     console.log(element)
     document.getElementById("d2").innerHTML+=`
       <div class="img-block">
-        <img src=${element.src} class="s-img">
+      <img src=${element.src} class="s-img">
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
@@ -284,16 +286,47 @@ function showstatus(data){
 
   // console.log(healthycount)
   if (healthycount!==0){
+    document.getElementById("hl").style.display="block"
     updatehealthy()
+  }
+  else{
+    document.getElementById("hl").style.display="none"
   }
   if (infected!==0){
     document.getElementById("in-sum").innerText=`${infected} ${infected>1?" sections are ":"section is "} infected `;
   }
 
-  if (a!==0)updatea()
-  if (b!==0)updateb()
-  if (c!==0)updatec()
-  if (d!==0)updated()
+  if (a!==0){
+    document.getElementById("a").style.display="block"
+    updatea()
+  }
+  else{
+    document.getElementById("a").style.display="none"
+  }
+  if (b!==0){
+    document.getElementById("b").style.display="block"
+    updateb()
+  }
+  else{
+    document.getElementById("b").style.display="none"
+  }
+  if (c!==0){
+    document.getElementById("c").style.display="block"
+    updatec()
+  }
+  else{
+    document.getElementById("c").style.display="none"
+  }
+  
+  
+  if (d!==0){
+    document.getElementById("d").style.display="block"
+    updated()
+  }
+  else{
+    document.getElementById("d").style.display="none"
+  }
+
 
 
   var currentdate = new Date(); 
@@ -310,6 +343,70 @@ function showstatus(data){
 }
 
 showstatus(data)
+
+//////////////////////////////////////////////////////////////////////////////////////////// 
+                              //image zoom
+
+
+// function imageZoom(imgID, resultID) {
+//   var img, lens, result, cx, cy;
+//   img = document.getElementById(imgID);
+//   console.log(img)
+//   result = document.getElementById(resultID);
+//   /*create lens:*/
+//   lens = document.createElement("DIV");
+//   lens.setAttribute("class", "img-zoom-lens");
+//   /*insert lens:*/
+//   img.parentElement.insertBefore(lens, img);
+//   /*calculate the ratio between result DIV and lens:*/
+//   cx = result.offsetWidth / lens.offsetWidth;
+//   cy = result.offsetHeight / lens.offsetHeight;
+//   /*set background properties for the result DIV:*/
+//   result.style.backgroundImage = "url('" + img.src + "')";
+//   result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+//   /*execute a function when someone moves the cursor over the image, or the lens:*/
+//   lens.addEventListener("mousemove", moveLens);
+//   img.addEventListener("mousemove", moveLens);
+//   /*and also for touch screens:*/
+//   lens.addEventListener("touchmove", moveLens);
+//   img.addEventListener("touchmove", moveLens);
+//   function moveLens(e) {
+//     var pos, x, y;
+//     /*prevent any other actions that may occur when moving over the image:*/
+//     e.preventDefault();
+//     /*get the cursor's x and y positions:*/
+//     pos = getCursorPos(e);
+//     /*calculate the position of the lens:*/
+//     x = pos.x - (lens.offsetWidth / 2);
+//     y = pos.y - (lens.offsetHeight / 2);
+//     /*prevent the lens from being positioned outside the image:*/
+//     if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+//     if (x < 0) {x = 0;}
+//     if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+//     if (y < 0) {y = 0;}
+//     /*set the position of the lens:*/
+//     lens.style.left = x + "px";
+//     lens.style.top = y + "px";
+//     /*display what the lens "sees":*/
+//     result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+//   }
+//   function getCursorPos(e) {
+//     var a, x = 0, y = 0;
+//     e = e || window.event;
+//     /*get the x and y positions of the image:*/
+//     a = img.getBoundingClientRect();
+//     /*calculate the cursor's x and y coordinates, relative to the image:*/
+//     x = e.pageX - a.left;
+//     y = e.pageY - a.top;
+//     /*consider any page scrolling:*/
+//     x = x - window.pageXOffset;
+//     y = y - window.pageYOffset;
+//     return {x : x, y : y};
+//   }
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////// 
+
 
 
 

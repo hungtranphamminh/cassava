@@ -37,46 +37,51 @@
                 <div class="detail-title">
                     Detailed Information of All Sections
                 </div>
-                <div class="detail-info">
-                    <div id="hl" class="detail-sec">
-                        <div id="hl1" class="sec-title">noice
-                        </div>
-                        <div id="hl2" class="sec-img">
-                            
-                        </div>
+                <div class="info-box">
+                    <div class="option-box">
+                        <!-- <div class="img-zoom-container">
+                            <div id="myresult" class="img-zoom-result"></div>
+                        </div>                      -->
                     </div>
-                    <div id="a" class="detail-sec">
-                        <div id="a1" class="sec-title">noice
+                    <div class="detail-info">
+                        <div id="hl" class="detail-sec">
+                            <div id="hl1" class="sec-title"></div>
+                            <div id="hl2" class="sec-img">
+                                
+                            </div>
                         </div>
-                        <div id="a2" class="sec-img">
-                            
+                        <div id="a" class="detail-sec">
+                            <div id="a1" class="sec-title">
+                            </div>
+                            <div id="a2" class="sec-img">
+                            </div>
                         </div>
+                        <div id="b" class="detail-sec">
+                            <div id="b1" class="sec-title">
+                            </div>
+                            <div id="b2" class="sec-img">
+                            </div>
+                        </div>
+                        <div id="c" class="detail-sec">
+                            <div id="c1" class="sec-title">
+                            </div>
+                            <div id="c2" class="sec-img">
+                                
+                            </div>
+                        </div>
+                        <div id="d" class="detail-sec">
+                            <div id="d1" class="sec-title">
+                            </div>
+                            <div id="d2" class="sec-img">
+                                
+                            </div>
+                        </div>
+                        
+    
                     </div>
-                    <div id="b" class="detail-sec">
-                        <div id="b1" class="sec-title">noice
-                        </div>
-                        <div id="b2" class="sec-img">
-                            
-                        </div>
-                    </div>
-                    <div id="c" class="detail-sec">
-                        <div id="c1" class="sec-title">noice
-                        </div>
-                        <div id="c2" class="sec-img">
-                            
-                        </div>
-                    </div>
-                    <div id="d" class="detail-sec">
-                        <div id="d1" class="sec-title">noice
-                        </div>
-                        <div id="d2" class="sec-img">
-                            
-                        </div>
-                    </div>
-                    
 
-                    </div>
                 </div>
+                
             </div>
             
             <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
@@ -85,26 +90,38 @@
             <script src="upload.js"></script>
 
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-            <div class="direct-input">
-                <div class="file-upload">
-                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
             
-                    <div class="image-upload-wrap">
-                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                        <div class="drag-text">
-                        <h3>Drag and drop a file or select add Image</h3>
-                        </div>
-                    </div>
-                    <div class="file-upload-content">
-                        <img class="file-upload-image" src="#" alt="your image" />
-                        <div class="image-title-wrap">
-                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                        </div>
-                    </div>
-            </div>
             <!-- <div class="test-img">
                 <img class="file-upload-image" src=""/>
             </div> -->
+            <div class="direct-box">
+                <div class="direct-title">
+                    Directly input an image to classify
+                </div>
+                <div class="direct-input">
+                    <div class="file-upload">
+                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+                
+                        <div class="image-upload-wrap">
+                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                            <div class="drag-text">
+                            <h3>Drag and drop a file or select add Image</h3>
+                            </div>
+                        </div>
+                        <div class="file-upload-content">
+                            <img class="file-upload-image" src="#" alt="your image" />
+                            <div class="image-title-wrap">
+                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-an">
+                            Result
+                        </div>
+                    </div>
+                </div>
+            </div>
             
         </div>
         

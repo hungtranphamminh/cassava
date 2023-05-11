@@ -8,6 +8,7 @@ body {
     width: 600px;
     margin: 0 auto;
     padding: 20px;
+
   }
   
   .file-upload-btn {
@@ -117,8 +118,9 @@ body {
 
   .direct-input {
     margin-top: 100px;
-    background-color: red;
-    width: 400px;
+    margin: 40px;
+    background-color: white;
+    border-radius: 10px;
   }
 
 
@@ -251,7 +253,7 @@ body {
     border-radius: 10px;
     
   }
-  .detail-title{
+  .detail-title,.direct-title{
     
     text-align: center;
     margin: 40px;
@@ -294,6 +296,7 @@ body {
     border-width: 2px;
     border: #15824B solid;
     z-index: 50;
+    position: relative;
   }
 
 
@@ -315,4 +318,72 @@ body {
     font-weight: bold;
     color: #15824B;
     font-size: 25px;
+  }
+
+  .info-box{
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+  .option-box{
+    width: 400px;
+    position: relative;
+    margin-right: 500px;
+    display: flex;
+  }
+
+  .img-zoom-container {
+    position: relative;
+    margin-left: 80px;
+    margin-top: 80px;
+    
+  }
+  
+  .img-zoom-lens {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    /*set the size of the lens:*/
+    width: 40px;
+    height: 40px;
+  }
+  
+  .img-zoom-result {
+    border: 2px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 300px;
+    height: 300px;
+    z-index: 100;
+  }
+
+  .direct-input{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .direct-box{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 40px;
+    border-radius: 10px;
+  }
+  .result-box{
+    width: 600px;
+    border: 2px green solid;
+    border-radius: 10px;
+    /* position: relative; */
+    text-align: center;
+  }
+
+  .result-an{
+    /* position: absolute; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
+    font-weight: bold;;
+    font-size: 30px;
+    background-color:#15824B;
+
+
   }
