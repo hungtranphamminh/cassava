@@ -156,6 +156,7 @@ body {
     background-color: rgba(255, 255, 255, 0.5); 
     padding: 0;
     margin: 0;
+    height: auto;
   }
 
   .hsum{
@@ -245,7 +246,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 900px;
+    height: auto;
     margin: 40px;
     border-radius: 10px;
     
@@ -266,10 +267,52 @@ body {
 
   .detail-info{
     display: flex;
+    flex-direction: column;
+  }
+  .detail-sec{
+    margin-top: 20px;
+    /* background-color: lightblue; */
+    display: flex;
+    flex-direction: column;
+    border: #15824B solid;
+    border-width: 2px;
+
+  }
+
+  .sec-img{
+    display: flex;
     flex-direction: row;
-  }
-  .detail-sum{
+    flex-wrap: wrap;
 
   }
+  .img-block{
+    position: relative;
+  }
+  .s-img{
+    width: 225px;
+    margin-left: 20px;
+    border-width: 2px;
+    border: #15824B solid;
+    z-index: 50;
+  }
 
 
+
+  .sec-name{
+    position: absolute;
+    bottom: 10px;
+    /* right: 10px; */
+    right: 10px;
+    z-index: 100;
+    background-color: white;
+    padding: 5px;
+    color:#15824B;
+    font-weight: bold;
+  }
+
+  .sec-title{
+    margin: 20px;
+    font-weight: bold;
+    color: #15824B;
+    font-size: 25px;
+  }
