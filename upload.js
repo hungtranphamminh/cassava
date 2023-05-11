@@ -3,79 +3,98 @@
 let data = [
   {
     "status":"healthy",
-    "prob":0.9
+    "prob":0.9,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.7
+    "prob":0.7,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.6
+    "prob":0.6,
+    "src":"/image/test.jpg"
   },
   {
     "status":"infected",
-    "prob":0.7
+    "prob":0.7,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"healthy",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"a",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"b",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"c",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"d",
-    "prob":0.3
-  },
-  {
-    "status":"e",
-    "prob":0.3
-  },
-  {
-    "status":"f",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"a",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
+  },
+  {
+    "status":"b",
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"a",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"a",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
+  },
+  {
+    "status":"d",
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
     "status":"a",
-    "prob":0.3
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
   {
-    "status":"a",
-    "prob":0.3
+    "status":"d",
+    "prob":0.3,
+    "src":"/image/test.jpg"
   },
 ] 
 console.log(data)
@@ -83,19 +102,50 @@ console.log(data)
 var sectioncount=0;
 var healthycount = 0;
 var infected = 0;
+var a=0,b=0,c=0,d=0;
 
-function showstatus(data){
-
+function classifidata(data){
   data.forEach(element => {
     sectioncount+=1
     //console.log(element)   
-    if (element.status==="healthy")
+    // if (element.status==="healthy")
+    //     healthycount+=1;
+    // else{
+
+    //   infected+=1;
+    // }    
+    switch(element.status){
+      case "healthy":
         healthycount+=1;
-    else{
-      infected+=1;
-    }    
+        break;
+      case "a":
+        a+=1;
+        infected+=1;
+        break;
+      case "b":
+        b+=1;
+        infected+=1;
+        break;
+      case "c":
+        c+=1;
+        infected+=1;
+        break;
+      case "d":
+        d+=1;
+        infected+=1;
+        break;
+      default:
+        
+        
+    }
   });
-  console.log(healthycount)
+}
+
+classifidata(data)
+
+function showstatus(data){
+
+  // console.log(healthycount)
   if (healthycount!==0){
     document.getElementById("hsum").innerText=`${healthycount} ${healthycount>1?" sections are ":"section is "} healthy `;
   }
@@ -119,7 +169,25 @@ console.log(data)
 showstatus(data)
 
 
+
 window.onload = function() {
+  chart_data=[{
+    type: "pie",
+    startAngle: 240,
+    yValueFormatString: "##0.00\"%\"",
+    indexLabel: "{label} {y}",
+    dataPoints: [
+      // {color:"lightgreen",y: `${hpor}`, label: "Healthy"},
+      // {color:"crimson",y: `${ipor}`, label: "Infected"},
+  
+    ]
+  }]
+  console.log(chart_data[0].dataPoints)
+  if (healthycount>0)chart_data[0].dataPoints.push({color:"lightgreen",y: `${healthycount}`, label: "Healthy"})
+  if (a>0)chart_data[0].dataPoints.push({y: `${pcal(a)}`, label: "a"})
+  if (b>0)chart_data[0].dataPoints.push({y: `${pcal(b)}`, label: "b"})
+  if (c>0)chart_data[0].dataPoints.push({y: `${pcal(c)}`, label: "c"})
+  if (d>0)chart_data[0].dataPoints.push({y: `${pcal(d)}`, label: "d"})
 
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -127,70 +195,22 @@ window.onload = function() {
       text: "Cassava Farm Record",
       color:"green"
     },
-    data: [{
-      type: "pie",
-      startAngle: 240,
-      yValueFormatString: "##0.00\"%\"",
-      indexLabel: "{label} {y}",
-      dataPoints: [
-        {color:"lightgreen",y: `${hpor}`, label: "Healthy"},
-        {color:"crimson",y: `${ipor}`, label: "Infected"},
-
-      ]
-    }]
+    data: chart_data
+    
   });
+  // console.log(data.dataPoints)
   chart.render();
 }
+// detailed chart
+
+function pcal(num){
+  return num/sectioncount*100
+}
+
+// var hpor = healthycount / sectioncount*100;
+// var ipor = 100 - hpor;
 
 
-
-
-var hpor = healthycount / sectioncount*100;
-var ipor = 100 - hpor;
-
-// const dataSource = {
-//   chart: {
-//     caption: "Cassava Farm Record",
-//     showlabels: "0",
-//     showvalues: "1",
-//     showpercentvalues: "0",
-//     decimal: "2",
-//     enableslicing: "1",    
-//     slicingdistance: "20",
-//     pieYScale: "100",
-//     pieSliceDepth: "25",
-//     startingangle: "90",
-//     reverseLegend: "1",
-//     theme: "fusion"
-//   },
-//   data: [
-//     {
-//       label: "Healthy Section",
-//       value: `${hpor}`,
-//       displayvalue: `${hpor}%`,
-//       isSliced: "1",
-//       color: "#4169e1"
-//     },
-//     {
-//       label: "Infected Section",
-//       value: `${ipor}`,
-//       displayvalue: `${ipor}%`,
-//       isSliced: "1",
-//       color: "#4169e1"
-//     }
-//   ]
-// };
-
-// FusionCharts.ready(function() {
-//   var myChart = new FusionCharts({
-//     type: "pie3d",
-//     renderAt: "chart-container",
-//     width: "100%",
-//     height: "100%",
-//     dataFormat: "json",
-//     dataSource
-//   }).render();
-// });
 
 
 

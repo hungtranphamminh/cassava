@@ -176,7 +176,7 @@ body {
   }
   .status-box{
     background-color: white;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -186,6 +186,7 @@ body {
     color: green;
     font-size: 40px;
     height: 400px;
+    align-items: center;
   }
 
   .status-summary{
@@ -209,17 +210,19 @@ body {
     /* background-color: aliceblue; */
   }
   .summary-title{
+    
     background-color: #15824B;
-    margin: 40px;
-    margin-left: 90px;
-    padding: 30px;
+    /* margin: 40px; */
     text-align: center;
     /* color: #1AA059; */
+    display: flex;
+    align-items: center;
     color: white;
     font-weight: bolder;
-    font-size: 40px;
+    font-size: 35px;
     border-radius: 10px;
-
+    width: 300px;
+    height: 370px;
   }
 
   #total{
@@ -239,18 +242,34 @@ body {
   }
 
   .detail{
+    display: flex;
+    flex-direction: column;
     background-color: white;
     height: 900px;
     margin: 40px;
     border-radius: 10px;
+    
   }
   .detail-title{
-    padding:40px;
+    
     text-align: center;
     margin: 40px;
     font-size: 40px;
     font-weight: bolder;
-    color: #15824B;
+    color: white;
+    background-color:#15824B;
+    border-radius: 10px 10px 0 0;
+    
+    margin: 0px;
+    
+  }
+
+  .detail-info{
+    display: flex;
+    flex-direction: row;
+  }
+  .detail-sum{
+
   }
 
 
