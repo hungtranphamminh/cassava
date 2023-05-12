@@ -333,7 +333,7 @@ body {
   .option-box{
     width: 400px;
     position: relative;
-    background-color: red;
+    /* background-color: red; */
     display: flex;
   }
 
@@ -391,3 +391,69 @@ body {
 
 
   }
+
+
+
+
+
+
+
+
+
+.checkbox {
+  margin: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+label {
+  font-family: Helvetica; 
+  letter-spacing: 1px;
+  /* // font-variant: small-caps;
+  // text-transform: uppercase; */
+}
+
+.checkbox-flip {
+    display:none;
+}
+
+.checkbox-flip + label span{
+    display:inline-block;
+    width:25px;
+    height:19px;
+    margin: 0 5px -4px 0; /*layout relationship between check and label*/
+    &:before,
+    &:after {
+		  transition: all .3s ease-in-out;
+		  content: "";
+		  position: absolute;
+		  z-index: 1;
+		  width: 1rem;
+		  height: 1.2rem;
+      background: transparent;
+		  border: 2px solid greenyellow; 
+    }
+     &:after {
+      z-index: 0;
+      border: none;
+    }
+}
+
+.checkbox-flip:checked + label span {
+     &:before {
+      transform:rotateY(180deg);
+      background: greenyellow;
+    }
+}
+
+
+.show-option-cb{
+  margin: 20px 0px 0px 20px;
+  font-size: 20px
+}
+
+.cp-title{
+  font-weight: bold;
+}

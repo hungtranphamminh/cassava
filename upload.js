@@ -477,7 +477,11 @@ function readURL(input) {
   }
 
 
-
+function changeDisplay(status){
+  var displaySec = document.getElementById(status)
+  if (displaySec.style.display!=="none")displaySec.setAttribute("style","display:none")
+  else displaySec.setAttribute("style","display:flex")
+}
 
 
 function removeUpload() {
