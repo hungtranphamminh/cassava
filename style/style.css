@@ -300,7 +300,10 @@ body {
     position: relative;
   }
 
-
+  .scroll-section{
+    height: 600px;
+    overflow: scroll;
+  }
 
   .sec-name{
     position: absolute;
