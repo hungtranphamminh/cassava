@@ -1,5 +1,5 @@
 
-//get data from camera
+//sections's data
 let data = [
   {
     "status":"healthy",
@@ -20,7 +20,7 @@ let data = [
     "sec":"3"
   },
   {
-    "status":"infected",
+    "status":"a",
     "prob":0.7,
     "src":"/image/test.jpg",
     "sec":"4"
@@ -159,16 +159,16 @@ let data = [
   },
 
 ] 
-// console.log(data)
 
-var sectioncount=0;
-var healthycount = 0;
-var infected = 0;
-var a=0,b=0,c=0,d=0;
-var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]
+
+var sectioncount=0;   //total numbs of sections
+var healthycount = 0; //total healthy secs
+var infected = 0;     //total infected secs
+var a=0,b=0,c=0,d=0;  // 4 diseases count
+var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]  //obj ar for each disease
 
 //take in array of object and then classifi them into different array
-function classifidata(data){
+function classifiData(data){
   data.forEach(element => {
     sectioncount+=1
     
@@ -204,7 +204,8 @@ function classifidata(data){
   });
 }
 
-function updatehealthy(){
+
+function updateHealthy(){
   document.getElementById("hsum").innerText=`${healthycount} ${healthycount>1?" sections are ":"section is "} healthy `;
   document.getElementById("hl1").innerHTML=`${healthycount} ${healthycount>1?"sections are ":"section is"} in a healthy state`
 
@@ -212,12 +213,23 @@ function updatehealthy(){
     console.log(element)
     let sid=element.sec.toString()
     console.log(sid)
+
+    // var onClickFunction = `"zoomSection("`+`${element.src}`+`")"`
+    // onClickParam = element.src.split("/")[2]
+
+    var onClickParam = element.src
+    
+    onClickParam="zoomSection(\""+onClickParam+"\")"
+    console.log("syntax check: ",onClickParam)
+    console.log(element.src)
+
     document.getElementById("hl2").innerHTML+=`
       <div class="img-block">
-        <img id=${sid} src=${element.src} class="s-img">
+        <img id=${sid} src=${element.src} class="s-img" onclick='${onClickParam}'>
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
+    console.log(document.getElementById("hl2").innerHTML)
   });
 
 
@@ -275,17 +287,19 @@ function updated(){
   });
 }
 
-classifidata(data)
+// classifiData(data)
 
 //show summary as well as section status
-function showstatus(data){
+function showStatus(data){
 
   // console.log(healthycount)
   if (healthycount!==0){
-    document.getElementById("hl").style.display="block"
-    updatehealthy()
+    document.getElementById("hl").style.display="flex"
+    updateHealthy()
+    changeDisplay("hl")
   }
   else{
+    hideEmptyCb("hl")
     document.getElementById("hl").style.display="none"
   }
   if (infected!==0){
@@ -293,37 +307,43 @@ function showstatus(data){
   }
 
   if (a!==0){
-    document.getElementById("a").style.display="block"
+    document.getElementById("a").style.display="flex"
     updatea()
+    changeDisplay("a")
   }
   else{
+    hideEmptyCb("a")
     document.getElementById("a").style.display="none"
   }
   if (b!==0){
-    document.getElementById("b").style.display="block"
+    document.getElementById("b").style.display="flex"
     updateb()
+    changeDisplay("b")
   }
   else{
+    hideEmptyCb("b")
     document.getElementById("b").style.display="none"
   }
   if (c!==0){
-    document.getElementById("c").style.display="block"
+    document.getElementById("c").style.display="flex"
     updatec()
+    changeDisplay("c")
   }
   else{
+    hideEmptyCb("c")
     document.getElementById("c").style.display="none"
   }
-  
-  
   if (d!==0){
-    document.getElementById("d").style.display="block"
+    document.getElementById("d").style.display="flex"
     updated()
+    changeDisplay("d")
   }
   else{
+    hideEmptyCb("d")
     document.getElementById("d").style.display="none"
   }
 
-
+  
 
   var currentdate = new Date(); 
   var datetime = "Latest Record On " + currentdate.getDate() + "/"
@@ -338,7 +358,8 @@ function showstatus(data){
 
 }
 
-showstatus(data)
+// classifiData(data)
+// showStatus(data)
 
 //////////////////////////////////////////////////////////////////////////////////////////// 
                               //image zoom
@@ -407,7 +428,8 @@ showstatus(data)
 
 //pie chart
 
-window.onload = function() {
+// window.onload = function() {
+function showPie() {
   chart_data=[{
     type: "pie",
     startAngle: 240,
@@ -418,11 +440,11 @@ window.onload = function() {
     ]
   }]
   
-  if (healthycount>0)chart_data[0].dataPoints.push({color:"lightgreen",y: `${pcal(healthycount)}`, label: "Healthy"})
-  if (a>0)chart_data[0].dataPoints.push({y: `${pcal(a)}`, label: "a"})
-  if (b>0)chart_data[0].dataPoints.push({y: `${pcal(b)}`, label: "b"})
-  if (c>0)chart_data[0].dataPoints.push({y: `${pcal(c)}`, label: "c"})
-  if (d>0)chart_data[0].dataPoints.push({y: `${pcal(d)}`, label: "d"})
+  if (healthycount>0)chart_data[0].dataPoints.push({color:"lightgreen",y: `${percentageCal(healthycount)}`, label: "Healthy"})
+  if (a>0)chart_data[0].dataPoints.push({y: `${percentageCal(a)}`, label: "a"})
+  if (b>0)chart_data[0].dataPoints.push({y: `${percentageCal(b)}`, label: "b"})
+  if (c>0)chart_data[0].dataPoints.push({y: `${percentageCal(c)}`, label: "c"})
+  if (d>0)chart_data[0].dataPoints.push({y: `${percentageCal(d)}`, label: "d"})
   console.log(chart_data[0].dataPoints)
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -439,14 +461,14 @@ window.onload = function() {
 
 
 //calculate % for pie chart
-function pcal(num){
+function percentageCal(num){
   return num/sectioncount*100
 }
 
-
-
-
+//keeping the upload img source
 var imgsrc;
+
+
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -463,7 +485,7 @@ function readURL(input) {
         $('.file-upload-content').show();
   
         $('.image-title').html(input.files[0].name);
-        document.getElementById("directthis").setAttribute("src", imgsrc);
+        //document.getElementById("directthis").setAttribute("src", imgsrc);
         console.log("this the upload one:",imgsrc)
       };
       
@@ -477,10 +499,25 @@ function readURL(input) {
   }
 
 
+
+function hideEmptyCb(status){
+  document.getElementById(status+'cb').setAttribute("style","display:none")
+}
+
 function changeDisplay(status){
+
+  document.getElementById(status+'cb').setAttribute("style","display:flex")
+
   var displaySec = document.getElementById(status)
   if (displaySec.style.display!=="none")displaySec.setAttribute("style","display:none")
-  else displaySec.setAttribute("style","display:flex")
+  else {
+    if ((status==="hl" && healthycount!==0)||
+    (status==="a"&&a!==0)||
+    (status==="b"&&b!==0)||
+    (status==="c"&&c!==0)||
+    (status==="d"&&d!==0))
+    displaySec.setAttribute("style","display:flex")
+  }
 }
 
 
@@ -489,12 +526,143 @@ function removeUpload() {
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
 }
-$('.image-upload-wrap').bind('dragover', function () {
-      $('.image-upload-wrap').addClass('image-dropping');
-    });
-    $('.image-upload-wrap').bind('dragleave', function () {
-      $('.image-upload-wrap').removeClass('image-dropping');
-});
 
 
+
+
+function zoomSection(isrc){
+  console.log("event work")
+  console.log(isrc)
+  var zoomAtr = "background:url(\""+isrc+"\")"
+  console.log(zoomAtr)
+  document.getElementById("zoomC").setAttribute("style",`${zoomAtr}`)
+  console.log(document.getElementById("zoomC"))
+  
+}
+
+function resetSecDisplay(){
+  var idArray = ["hl2","a2","b2","c2","d2"]
+  idArray.forEach(element =>{
+    document.getElementById(element).innerHTML=``
+  })
+}
+
+function pageReload(){
+  healthycount=infected=a=b=c=d=sectioncount=0
+  resetSecDisplay()
+  classifiData(data)
+  showPie()
+  showStatus(data)
+}
+
+pageReload()
+
+
+
+// Make the DIV element draggable:
+dragElement(document.getElementById("mydiv"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function setDragDisplay(state){
+  document.getElementById("mydiv").setAttribute("style",`display:${state}`)
+}
+
+
+
+//hover zoom
+var addZoom = target => {
+  // (A) GET CONTAINER + IMAGE SOURCE
+  let container = document.getElementById(target),
+      imgsrc = container.currentStyle || window.getComputedStyle(container, false);
+      imgsrc = imgsrc.backgroundImage.slice(4, -1).replace(/"/g, "");
+ 
+  // (B) LOAD IMAGE + ATTACH ZOOM
+  let img = new Image();
+  img.src = imgsrc;
+  img.onload = () => {
+    // (B1) CALCULATE ZOOM RATIO
+    let ratio = img.naturalHeight / img.naturalWidth,
+        percentage = ratio * 100 + "%";
+ 
+    // (B2) ATTACH ZOOM ON MOUSE MOVE
+    container.onmousemove = e => {
+      let rect = e.target.getBoundingClientRect(),
+          xPos = e.clientX - rect.left,
+          yPos = e.clientY - rect.top,
+          xPercent = xPos / (container.clientWidth / 100) + "%",
+          yPercent = yPos / ((container.clientWidth * ratio) / 100) + "%";
+ 
+      Object.assign(container.style, {
+        backgroundPosition: xPercent + " " + yPercent,
+        backgroundSize: img.naturalWidth + "px"
+      });
+    };
+ 
+    // (B3) RESET ZOOM ON MOUSE LEAVE
+    container.onmouseleave = e => {
+      Object.assign(container.style, {
+        backgroundPosition: "center",
+        backgroundSize: "cover"
+      });
+    };
+  }
+};
+ 
+// (C) ATTACH FOLLOW ZOOM
+window.onload = () => addZoom("zoomC");
+
+
+
+
+// {
+// $('.image-upload-wrap').bind('dragover', function () {
+//       $('.image-upload-wrap').addClass('image-dropping');
+//     });
+//     $('.image-upload-wrap').bind('dragleave', function () {
+//       $('.image-upload-wrap').removeClass('image-dropping');
+// });
+// }
+
+
+// setInterval(pageReload,300000)
 

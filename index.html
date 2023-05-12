@@ -11,6 +11,29 @@
         <link rel="stylesheet" href="/style/style.css">
     </head>
     <body>
+
+        <!-- Draggable DIV -->
+        <div id="mydiv">
+
+            
+
+            <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+            <div id="mydivheader">
+                <div class="drag-header">
+                    Section:
+                </div>
+                <button onclick="setDragDisplay('none')"></button>
+            </div>
+            <!-- <div id="img-container" >
+                <img src="/image/rwanda_story.jpeg" >
+            </div> -->
+            <div id="zoomC"></div>
+        </div>
+
+
+
+
+
         <div class="title-box">
             <div class="title-bar">
                 Cassava Disease Classification System
@@ -46,27 +69,27 @@
                                 Display sections by status:
                             </div>
                             <ul>
-                                <li class="checkbox">
+                                <li class="checkbox" id="hlcb">
                                   <input class="checkbox-flip" type="checkbox" id="check1" onclick="changeDisplay('hl')"/>
                                   <label for="check1"><span></span>Healthy</label>
                                 </li>
                                 
-                                <li class="checkbox">
+                                <li class="checkbox" id="acb">
                                   <input class="checkbox-flip" type="checkbox" id="check2" onclick="changeDisplay('a')"/>
                                   <label for="check2"><span></span>A infected</label>
                                 </li>
                                 
-                                <li class="checkbox">
+                                <li class="checkbox" id="bcb">
                                   <input class="checkbox-flip" type="checkbox" id="check3" onclick="changeDisplay('b')"/>
                                   <label for="check3"><span></span>B infected</label>
                                 </li>
                                 
-                                <li class="checkbox">
+                                <li class="checkbox" id="ccb">
                                   <input class="checkbox-flip" type="checkbox" id="check4" onclick="changeDisplay('c')"/>
                                   <label for="check4"><span></span>C infected</label>
                                 </li>
                                 
-                                <li class="checkbox">
+                                <li class="checkbox" id="dcb">
                                   <input class="checkbox-flip" type="checkbox" id="check5" onclick="changeDisplay('d')"/>
                                   <label for="check5"><span></span>D infected</label>
                                 </li>
@@ -138,11 +161,11 @@
                 <div class="direct-input">
                     <div class="file-upload">
                         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-                
-                        <div class="image-upload-wrap">
+                        
+                        <div id="iuw" class="image-upload-wrap">
                             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
                             <div class="drag-text">
-                            <h3>Drag and drop a file or select add Image</h3>
+                            <h3>Select add Image</h3>
                             </div>
                         </div>
                         <div class="file-upload-content">
@@ -160,11 +183,13 @@
                 </div>
             </div>
             
-            <div class="test-direct">
+            <!-- <div class="test-direct">
                 <img src="" id="directthis">
-            </div>
+            </div> -->
 
         </div>
+        
+
         
     </body>
 </html>

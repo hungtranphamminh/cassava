@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
     background-color: #eeeeee;
+    position: relative;
   }
   
   .file-upload {
@@ -292,7 +293,7 @@ body {
     position: relative;
   }
   .s-img{
-    width: 225px;
+    width: 100px;
     margin-left: 20px;
     border-width: 2px;
     border: #15824B solid;
@@ -456,4 +457,39 @@ label {
 
 .cp-title{
   font-weight: bold;
+}
+
+#mydiv {
+  position: absolute;
+  z-index: 290;
+  left: 700px;
+  top: 1000px;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+#mydivheader {
+  display: flex;
+  padding: 10px;
+  cursor: move;
+  z-index: 300;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+#img-container{
+  z-index: 310;
+  position: relative;
+}
+
+#zoomC {
+  /* (A) DIMENSIONS */
+  width: 600px;
+  height: 338px;
+ 
+  /* (B) BACKGROUND IMAGE */
+  background: url("/image/rwanda_story.jpeg");
+  background-position: center;
+  background-size: cover;
 }
