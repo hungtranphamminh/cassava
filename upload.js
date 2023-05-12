@@ -159,7 +159,7 @@ let data = [
   },
 
 ] 
-console.log(data)
+// console.log(data)
 
 var sectioncount=0;
 var healthycount = 0;
@@ -167,16 +167,11 @@ var infected = 0;
 var a=0,b=0,c=0,d=0;
 var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]
 
+//take in array of object and then classifi them into different array
 function classifidata(data){
   data.forEach(element => {
     sectioncount+=1
-    //console.log(element)   
-    // if (element.status==="healthy")
-    //     healthycount+=1;
-    // else{
-
-    //   infected+=1;
-    // }    
+    
     switch(element.status){
       case "healthy":
         healthycount+=1;
@@ -282,6 +277,7 @@ function updated(){
 
 classifidata(data)
 
+//show summary as well as section status
 function showstatus(data){
 
   // console.log(healthycount)
@@ -409,6 +405,7 @@ showstatus(data)
 
 
 
+//pie chart
 
 window.onload = function() {
   chart_data=[{
@@ -417,9 +414,7 @@ window.onload = function() {
     yValueFormatString: "##0.00\"%\"",
     indexLabel: "{label} {y}",
     dataPoints: [
-      // {color:"lightgreen",y: `${hpor}`, label: "Healthy"},
-      // {color:"crimson",y: `${ipor}`, label: "Infected"},
-  
+
     ]
   }]
   
@@ -438,29 +433,27 @@ window.onload = function() {
     data: chart_data
     
   });
-  // console.log(data.dataPoints)
+  
   chart.render();
 }
-// detailed chart
 
+
+//calculate % for pie chart
 function pcal(num){
   return num/sectioncount*100
 }
 
-// var hpor = healthycount / sectioncount*100;
-// var ipor = 100 - hpor;
 
 
 
-
-
+var imgsrc;
 
 function readURL(input) {
     if (input.files && input.files[0]) {
   
       var reader = new FileReader();
   
-      var imgsrc;
+      
 
       reader.onload = function(e) {
         imgsrc=e.target.result;
@@ -470,14 +463,21 @@ function readURL(input) {
         $('.file-upload-content').show();
   
         $('.image-title').html(input.files[0].name);
+        document.getElementById("directthis").setAttribute("src", imgsrc);
+        console.log("this the upload one:",imgsrc)
       };
       
       reader.readAsDataURL(input.files[0]);
   
+      
+
     } else {
       removeUpload();
     }
   }
+
+
+
 
 
 function removeUpload() {
@@ -491,7 +491,6 @@ $('.image-upload-wrap').bind('dragover', function () {
     $('.image-upload-wrap').bind('dragleave', function () {
       $('.image-upload-wrap').removeClass('image-dropping');
 });
-
 
 
 

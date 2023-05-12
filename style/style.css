@@ -270,6 +270,7 @@ body {
   .detail-info{
     display: flex;
     flex-direction: column;
+    max-width: 1100px;
   }
   .detail-sec{
     margin-top: 20px;
@@ -329,7 +330,7 @@ body {
   .option-box{
     width: 400px;
     position: relative;
-    margin-right: 500px;
+    background-color: red;
     display: flex;
   }
 
