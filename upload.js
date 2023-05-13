@@ -61,12 +61,12 @@ let data = [
     "src":"/image/test.jpg",
     "sec":10
   },
-  // {
-  //   "status":"c",
-  //   "prob":0.3,
-  //   "src":"/image/test.jpg",
-  //   "sec":11
-  // },
+  {
+    "status":"c",
+    "prob":0.3,
+    "src":"/image/test.jpg",
+    "sec":11
+  },
   {
     "status":"d",
     "prob":0.3,
@@ -234,11 +234,11 @@ function updateSection(secState){
   var plural;
   var secArray;
   switch(secState){
-    case "a":
+    case "k":
       plural=a;
       secArray=adata;
       break;
-    case "b":
+    case "l":
       plural=b;
       secArray=bdata;
       break;
@@ -295,19 +295,20 @@ function showStatus(data){
   }
 
   if (a!==0){
-    document.getElementById("a").style.display="flex"
-    updateSection("a")
-    changeDisplay("a")
+    document.getElementById("k").style.display="flex"
+    updateSection("k");
+    console.log("k")
+    changeDisplay("k")
   }
   else{
-    hideEmptyCb("a")
-    document.getElementById("a").style.display="none"
+    hideEmptyCb("k")
+    document.getElementById("k").style.display="none"
   }
   if (b!==0){
-    document.getElementById("b").style.display="flex"
+    document.getElementById("l").style.display="flex"
     // updateb()
-    updateSection("b")
-    changeDisplay("b")
+    updateSection("l")
+    changeDisplay("l")
   }
   else{
     hideEmptyCb("b")
@@ -350,7 +351,6 @@ function showStatus(data){
 }
 
 // classifiData(data)
-// showStatus(data)
 
 //////////////////////////////////////////////////////////////////////////////////////////// 
                               //image zoom
@@ -493,19 +493,20 @@ function readURL(input) {
 
 
 function hideEmptyCb(status){
-  document.getElementById(status+'cb').setAttribute("style","display:none")
+  document.getElementById(status+"cb").setAttribute("style","display:none")
 }
 
 function changeDisplay(status){
-
-  document.getElementById(status+'cb').setAttribute("style","display:flex")
+  console.log(status)
+  document.getElementById(status+"cb").setAttribute("style","display:flex")
+  
 
   var displaySec = document.getElementById(status)
   if (displaySec.style.display!=="none")displaySec.setAttribute("style","display:none")
   else {
     if ((status==="hl" && healthycount!==0)||
-    (status==="a"&&a!==0)||
-    (status==="b"&&b!==0)||
+    (status==="k"&&a!==0)||
+    (status==="l"&&b!==0)||
     (status==="c"&&c!==0)||
     (status==="d"&&d!==0))
     displaySec.setAttribute("style","display:flex")
@@ -536,7 +537,7 @@ function zoomSection(isrc,sec){
 }
 
 function resetSecDisplay(){
-  var idArray = ["hl2","a2","b2","c2","d2"]
+  var idArray = ["hl2","k2","l2","c2","d2"]
   idArray.forEach(element =>{
     document.getElementById(element).innerHTML=``
   })
@@ -623,9 +624,10 @@ function pageReload(){
   resetSecDisplay()
   classifiData(data)
   showPie()
-  
-  showStatus(data)
   showColChart()
+  console.log(document.getElementById("b"))
+  showStatus(data)
+  
   
 }
 
