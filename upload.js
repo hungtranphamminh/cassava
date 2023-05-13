@@ -16,7 +16,7 @@ let data = [
   {
     "status":"healthy",
     "prob":0.6,
-    "src":"/image/test.jpg",
+    "src":"/image/rwanda_story.jpeg",
     "sec":"3"
   },
   {
@@ -219,7 +219,7 @@ function updateHealthy(){
 
     var onClickParam = element.src
     
-    onClickParam="zoomSection(\""+onClickParam+"\")"
+    onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
     console.log("syntax check: ",onClickParam)
     console.log(element.src)
 
@@ -530,13 +530,16 @@ function removeUpload() {
 
 
 
-function zoomSection(isrc){
-  console.log("event work")
-  console.log(isrc)
-  var zoomAtr = "background:url(\""+isrc+"\")"
-  console.log(zoomAtr)
+function zoomSection(isrc,sec){
+  // console.log("event work")
+  // console.log(isrc)
+  var zoomAtr = "background-image:url(\""+isrc+"\")"
+  // console.log(zoomAtr)
   document.getElementById("zoomC").setAttribute("style",`${zoomAtr}`)
-  console.log(document.getElementById("zoomC"))
+  // console.log(document.getElementById("zoomC"))
+  if (document.getElementById("mydiv").style.display!=="block")
+    document.getElementById("mydiv").setAttribute("style","display:block")
+  document.getElementById("zoomtitle").innerText=`Section ${sec} zoom out`
   
 }
 
