@@ -210,18 +210,12 @@ function updateHealthy(){
   document.getElementById("hl1").innerHTML=`${healthycount} ${healthycount>1?"sections are ":"section is"} in a healthy state`
 
   hdata.forEach(element=>{
-    console.log(element)
+    
     let sid=element.sec.toString()
-    console.log(sid)
-
-    // var onClickFunction = `"zoomSection("`+`${element.src}`+`")"`
-    // onClickParam = element.src.split("/")[2]
-
     var onClickParam = element.src
     
     onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
-    console.log("syntax check: ",onClickParam)
-    console.log(element.src)
+    
 
     document.getElementById("hl2").innerHTML+=`
       <div class="img-block">
@@ -229,65 +223,59 @@ function updateHealthy(){
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
-    console.log(document.getElementById("hl2").innerHTML)
+
   });
 
 
 }
 
-function updatea(){
-  document.getElementById("a1").innerHTML=`${a} ${a>1?"sections are ":"section is"} infected with a`
-  adata.forEach(element=>{
-    console.log(element)
-    document.getElementById("a2").innerHTML+=`
+// cuz healthy have some more stuff so me separate healthy | 4 disease
+function updateSection(secState){
+  var plural;
+  var secArray;
+  switch(secState){
+    case "a":
+      plural=a;
+      secArray=adata;
+      break;
+    case "b":
+      plural=b;
+      secArray=bdata;
+      break;
+    case "c":
+      plural=c;
+      secArray=cdata;
+      break;
+    case "d":
+      plural=d;
+      secArray=ddata;
+      break;
+    default:
+      break;
+  }
+
+  
+
+  document.getElementById(secState+"1").innerHTML=`${plural} ${plural>1?"sections are ":"section is"} infected with ${secState}`
+
+  
+
+  secArray.forEach(element=>{
+    // console.log(element)
+
+    var onClickParam = element.src
+    
+    onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
+
+    document.getElementById(secState+"2").innerHTML+=`
       <div class="img-block">
-        <img src=${element.src} class="s-img">
+        <img src=${element.src} class="s-img" onclick='${onClickParam}'>
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
   });
 }
 
-function updateb(){
-  document.getElementById("b1").innerHTML=`${b} ${b>1?"sections are ":"section is"} infected with b`
-  bdata.forEach(element=>{
-    console.log(element)
-    document.getElementById("b2").innerHTML+=`
-      <div class="img-block">
-        <img src=${element.src} class="s-img">
-        <div class="sec-name">Section ${element.sec}</div>
-      </div>
-    `
-  });
-}
-
-function updatec(){
-  document.getElementById("c1").innerHTML=`${c} ${c>1?"sections are ":"section is"} infected with c`
-  cdata.forEach(element=>{
-    console.log(element)
-    document.getElementById("c2").innerHTML+=`
-      <div class="img-block">
-        <img src=${element.src} class="s-img">
-        <div class="sec-name">Section ${element.sec}</div>
-      </div>
-    `
-  });
-}
-
-function updated(){
-  document.getElementById("d1").innerHTML=`${d} ${d>1?"sections are ":"section is"} infected with d`
-  ddata.forEach(element=>{
-    console.log(element)
-    document.getElementById("d2").innerHTML+=`
-      <div class="img-block">
-      <img src=${element.src} class="s-img">
-        <div class="sec-name">Section ${element.sec}</div>
-      </div>
-    `
-  });
-}
-
-// classifiData(data)
 
 //show summary as well as section status
 function showStatus(data){
@@ -308,7 +296,7 @@ function showStatus(data){
 
   if (a!==0){
     document.getElementById("a").style.display="flex"
-    updatea()
+    updateSection("a")
     changeDisplay("a")
   }
   else{
@@ -317,7 +305,8 @@ function showStatus(data){
   }
   if (b!==0){
     document.getElementById("b").style.display="flex"
-    updateb()
+    // updateb()
+    updateSection("b")
     changeDisplay("b")
   }
   else{
@@ -326,7 +315,8 @@ function showStatus(data){
   }
   if (c!==0){
     document.getElementById("c").style.display="flex"
-    updatec()
+    // updatec()
+    updateSection("c")
     changeDisplay("c")
   }
   else{
@@ -335,7 +325,8 @@ function showStatus(data){
   }
   if (d!==0){
     document.getElementById("d").style.display="flex"
-    updated()
+    // updated()
+    updateSection("d")
     changeDisplay("d")
   }
   else{
