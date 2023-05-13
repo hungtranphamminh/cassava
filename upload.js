@@ -694,7 +694,7 @@ window.onload = () => addZoom("zoomC");
 
 // const upload = async () => {
   async function testDirect(){
-  const inputFile = document.getElementById('directimg').files[0]
+  const inputFile = document.getElementById('input-img').files[0]
   if (inputFile) {
       const formdata = new FormData();
       formdata.append('file', inputFile, inputFile.name);
