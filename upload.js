@@ -670,23 +670,42 @@ window.onload = () => addZoom("zoomC");
 
 // setInterval(pageReload,300000)
 
-function testDirect(){
-  var formdata = new FormData();    
-  formdata.append("image", fileInput.files[0], imgsrc);
+// function testDirect(){
+//   var formdata = new FormData();    
+//   formdata.append("image", fileInput.files[0], imgsrc);
 
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: formdata,
-    redirect: 'follow'
-  };
+//   var requestOptions = {
+//     method: 'POST',
+//     headers: myHeaders,
+//     body: formdata,
+//     redirect: 'follow'
+//   };
 
-  //replace YOUR_API_ToCall = url
+//   //replace YOUR_API_ToCall = url
 
-  fetch("YOUR_API_ToCall", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+//   fetch("YOUR_API_ToCall", requestOptions)
+//     .then(response => response.text())
+//     .then(result => console.log(result))
+//     .catch(error => console.log('error', error));
 
 
+// }
+
+
+// const upload = async () => {
+  async function testDirect(){
+  const inputFile = document.getElementById('directimg').files[0]
+  if (inputFile) {
+      const formdata = new FormData();
+      formdata.append('file', inputFile, inputFile.name);
+      const res = await fetch('http://127.0.0.1:8000/classfication/', {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow',
+        mode: 'cors',
+      });
+      data = await res.json();
+      console.log(data);
+  }
+  else console.log('Empty file input')
 }
