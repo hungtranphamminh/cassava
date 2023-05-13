@@ -490,7 +490,8 @@ function readURL(input) {
       };
       
       reader.readAsDataURL(input.files[0]);
-  
+      
+      testDirect()
       
 
     } else {
@@ -669,3 +670,23 @@ window.onload = () => addZoom("zoomC");
 
 // setInterval(pageReload,300000)
 
+function testDirect(){
+  var formdata = new FormData();    
+  formdata.append("image", fileInput.files[0], imgsrc);
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  //replace YOUR_API_ToCall = url
+
+  fetch("YOUR_API_ToCall", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+
+}
