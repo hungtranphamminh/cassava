@@ -223,36 +223,45 @@ var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]  //obj ar for each disease
 
 var hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; // last 5 records info (5 cases n record time)
 var datetime;
+var recover=[],newa=[],newb=[],newc=[],newd=[];
+
 
 //take in array of object and then classifi them into different array
 function classifiData(data){
+  var curh=[],cura=[],curb=[],curc=[],curd=[];
   data.forEach(element => {
     sectioncount+=1
+    
     
     switch(element.status){
       case "healthy":
         healthycount+=1;
         hdata.push(element);
+        curh.push(parseInt(element.sec));
         break;
       case "a":
         a+=1;
         infected+=1;
-        adata.push(element)
+        adata.push(element);
+        cura.push(parseInt(element.sec));
         break;
       case "b":
         b+=1;
         infected+=1;
-        bdata.push(element)
+        bdata.push(element);
+        curb.push(parseInt(element.sec));
         break;
       case "c":
         c+=1;
         infected+=1;
-        cdata.push(element)
+        cdata.push(element);
+        curc.push(parseInt(element.sec));
         break;
       case "d":
         d+=1;
         infected+=1;
-        ddata.push(element)
+        ddata.push(element);
+        curd.push(parseInt(element.sec));
         break;
       default:
         
@@ -291,6 +300,39 @@ function classifiData(data){
   crec.reverse();
   drec.reverse();
 
+  curh.forEach(section =>{
+    if (!(section in last5Rec[4].healthy))recover.push(section)
+  });
+  cura.forEach(section =>{
+    if (!(section in last5Rec[4].bb))newa.push(section)
+  });
+  curb.forEach(section =>{
+    if (!(section in last5Rec[4].bc))newb.push(section)
+  });
+  curc.forEach(section =>{
+    if (!(section in last5Rec[4].gm))recover.push(section)
+  });
+  curd.forEach(section =>{
+    if (!(section in last5Rec[4].md))recover.push(section)
+  });
+
+  recover.sort()
+  newa.sort()
+  newb.sort()
+  newc.sort()
+  newd.sort()
+
+  console.log(curh)
+  // console.log(last5Rec[4].healthy)
+  console.log("check new")
+  console.log(recover)
+  console.log(newa)
+  console.log(newb)
+  console.log(newc)
+  console.log(newd)
+  
+  
+  
 }
 
 
@@ -389,7 +431,6 @@ function showStatus(data){
   if (a!==0){
     document.getElementById("k").style.display="flex"
     updateSection("k");
-    console.log("k")
     changeDisplay("k")
   }
   else{
@@ -420,14 +461,51 @@ function showStatus(data){
     document.getElementById("d").style.display="flex"
     // updated()
     updateSection("d")
-    changeDisplay("d")
+    changeDisplay("d")  
   }
   else{
     hideEmptyCb("d")
     document.getElementById("d").style.display="none"
   }
 
-  
+  if (newa.length || newb.length || newc.length|| newd.length|| recover.length){
+    if (recover.length>0)document.getElementById("recv").innerHTML=`${recover.length>1?`Section ${recover} have`:`Sections ${recover} has`} <span id="recg">recovered</span>`
+    if (newa.length || newb.length || newc.length|| newd.length){
+      document.getElementById("newi").innerHTML=
+      `${newa.length + newb.length +newc.length +newd.length} ${(newa.length + newb.length +newc.length +newd.length)>1?"Sections are ":"Section is "}<span id="newr">infected</span> recently:`
+    }
+    if (newa.length){
+      document.getElementById("newa").setAttribute("style","display:li")
+      document.getElementById("newa").innerHTML=`${newa.length>1?`Section ${newa} are`:`Sections ${newa} is`} <span id="newr">infected</span> with <span id="newr-a">Bacterial Blight</span>`
+    }
+    else{
+      document.getElementById("newa").setAttribute("style","display:none")
+    }
+    if(newb.length){
+      document.getElementById("newb").setAttribute("style","display:li")
+      document.getElementById("newb").innerHTML=`${newb.length>1?`Section ${newb} are`:`Sections ${newb} is`} <span id="newr">infected</span> with <span id="newr-b">Brown Streak Disease</span>`
+    }
+    else{
+      document.getElementById("newb").setAttribute("style","display:none")
+    }
+    if(newc.length){
+      document.getElementById("newc").setAttribute("style","display:li")
+      document.getElementById("newc").innerHTML=`${newc.length>1?`Section ${newc} are`:`Sections ${newc} is`} <span id="newr">infected</span> with <span id="newr-c">Green Mottle</span>`
+    }
+    else{
+      document.getElementById("newc").setAttribute("style","display:none")
+    }
+    if(newd.length){
+      document.getElementById("newd").setAttribute("style","display:li")
+      document.getElementById("newd").innerHTML=`${newd.length>1?`Section ${newd} are`:`Sections ${newd} is`} <span id="newr">infected</span> with <span id="newr-d">Mosaic Disease</span>`
+    }
+    else{
+      document.getElementById("newd").setAttribute("style","display:none")
+    }
+  }
+  else{
+    document.getElementById("nonew").innerHTML=`There are no new changes in the sections's status.`
+  }
 
   
   
@@ -455,7 +533,7 @@ function showPie() {
   if (b>0)chart_data[0].dataPoints.push({color:"rgb(254, 176, 25)",y: `${percentageCal(b)}`, label: "Brown Streak Disease"})
   if (c>0)chart_data[0].dataPoints.push({color:"rgb(255, 69, 96)",y: `${percentageCal(c)}`, label: "Green Mottle"})
   if (d>0)chart_data[0].dataPoints.push({y: `${percentageCal(d)}`, label: "Mosaic Disease"})
-  console.log(chart_data[0].dataPoints)
+  // console.log(chart_data[0].dataPoints)
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     title: {
@@ -515,7 +593,7 @@ function hideEmptyCb(status){
 }
 
 function changeDisplay(status){
-  console.log(status)
+  // console.log(status)
   document.getElementById(status+"cb").setAttribute("style","display:flex")
   
 
@@ -553,10 +631,14 @@ function zoomSection(isrc,sec){
 function resetSecDisplay(){
   var idArray = ["hl2","k2","l2","c2","d2"]
   idArray.forEach(element =>{
-    document.getElementById(element).innerHTML=``
+    document.getElementById(element).innerHTML=""
   })
+
+  document.getElementById("colchart").setAttribute("style","display:none")
 }
 
+
+var chart1;
 function showColChart(){
   var options = {
     series: [{
@@ -631,23 +713,43 @@ function showColChart(){
       offsetX: 40
     }
   };
-
-
-  var chart = new ApexCharts(document.querySelector("#colchart"), options);
-  chart.render();
+ 
+  
+  // var chart = new ApexCharts(document.querySelector("#colchart"), options);
+  chart1 = new ApexCharts(document.querySelector("#colchart"), options);
+  document.getElementById("colchart").setAttribute("style","display:block")
+  
 
 }
 
+function updateChart(){
+  showColChart()
+  chart1.render()
+  window.resizeTo(2216-10,1069-10)
+}
+
+
 // reload with interval
 function pageReload(){
-  healthycount=infected=a=b=c=d=sectioncount=0
+  healthycount=0,infected=0,a=0,b=0,c=0,d=0,sectioncount=0
+  hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; 
+  datetime;
+  recover=[],newa=[],newb=[],newc=[],newd=[];
+  hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
+  
   resetSecDisplay()
   classifiData(data)
   showPie()
-  showColChart()
-  console.log(document.getElementById("b"))
   showStatus(data)
+  showColChart()
+  window.resizeTo(2016,969)
+  updateChart()
   
+  // chart1.render();
+  
+  console.log(healthycount)
+  console.log(window.innerHeight)
+  // console.log(document.getElementById("b"))
   
 }
 

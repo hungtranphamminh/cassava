@@ -125,24 +125,31 @@ body {
   }
 
 
-  body{
+  /* body{
+    
+    
+  } */
+
+  .main-body-container{
     background-image: url("/image/rwanda_story.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
-    padding: 30px;
+    height: 100%;
+    padding: 0px;
     background-attachment: fixed;
     margin: 0px;
+    margin-top: 200px;
     
   }
 
   .title-bar{
     font-size: 60px;
-    position: absolute;
-    left: 30px;
+    /* position: absolute; */
+    padding-left: 30px;
     bottom: 30px;
     color: white;
     font-weight: bold;
+    padding-top: 40px;
   }
 
   .title-box{
@@ -151,9 +158,11 @@ body {
     left: 0;
     margin: 0px;
     height: 200px;
-    
-    position: relative;
+    width: 100%;
     background-image: url("/image/header.png");
+    background-color: #15824B;
+    background-size: cover;
+    z-index: 150;
   }
 
   .main-content{
@@ -180,8 +189,12 @@ body {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    height: 1300px;
+    padding-bottom: 30px;
+    margin-bottom: 100px;
   }
   .status-box{
+    margin-top: 40px;
     background-color: white;
     /* margin-left: 50px; */
     padding: 10px;
@@ -339,6 +352,7 @@ body {
     position: relative;
     /* background-color: red; */
     display: flex;
+    margin-left: 100px;
   }
 
   .img-zoom-container {
@@ -545,9 +559,73 @@ label {
 	&:after { transform: rotate(-45deg); }
 }
 
-.compare{
-  margin: 20px;
+.compare,.stat{
+  /* margin: 20px; */
+  padding-left: 20px;
+  height: 100px;
   font-weight: bold;
   font-size: 30px;
   color: #15824B;
+}
+
+.stat{
+  margin-top: 30px;
+  margin-left: 100px;
+}
+
+.recv,#nonew{
+  margin-left: 0px;
+  /* padding-top: 30px; */
+
+  font-size: 24px;
+  color: #999;
+  font-weight: 700;
+}
+
+.newi{
+  font-size: 24px;
+  color: #999;
+  font-weight: 700;
+  margin-left: -2px;
+}
+
+#recv::marker{
+  content: " + ";
+  color: #15824B;
+}
+
+#recg{
+  color: rgb(0, 143, 251);
+}
+
+#newi::marker,#newa::marker,#newb::marker,
+#newc::marker,#newd::marker{
+  content: " - ";
+  color: #c13b2a;
+}
+
+#newr{
+  color: #c13b2a;
+}
+
+#newa,#newb,
+#newc,#newd{
+  margin-left: 25px;
+  font-size: 24px;
+  color: #999;
+  font-weight: 700;
+  
+}
+
+#newr-a{
+  color: rgb(0, 227, 150);
+}
+#newr-b{
+  color: rgb(254, 176, 25);
+}
+#newr-c{
+  color: rgb(255, 69, 96);
+}
+#newr-d{
+  color: rgb(119, 93, 208);
 }
