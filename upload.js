@@ -160,12 +160,69 @@ let data = [
 
 ] 
 
+//
 
-var sectioncount=0;   //total numbs of sections
-var healthycount = 0; //total healthy secs
-var infected = 0;     //total infected secs
+let last5Rec =[
+  {
+    "time":"14/5/2023 | 8:15:44",
+    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    "bb":[21,22],
+    "bc":[23,24],
+    "gm":[25,26],
+    "md":[]
+  },
+  {
+    "time":"14/5/2023 | 9:15:44",
+  "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+  "bb":[21,22],
+  "bc":[23,24],
+  "gm":[25,26],
+  "md":[]
+  },
+  {
+    "time":"14/5/2023 | 10:15:44",
+    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    "bb":[21,22],
+    "bc":[19,20,23,24],
+    "gm":[25,26],
+    "md":[]
+  },
+  {
+    "time":"14/5/2023 | 11:15:44",
+    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+    "bb":[21,22,17,18],
+    "bc":[19,20,23,24],
+    "gm":[25,26],
+    "md":[]
+  },
+  {
+    "time":"14/5/2023 | 12:15:44",
+    "healthy":[1,2,3,4,5,6,7,8,9,14,15,16],
+    "bb":[21,22,17,18],
+    "bc":[23,24,19,20],
+    "gm":[25,26],
+    "md":[10,11,12,13,]
+  }
+]
+
+
+
+
+
+
+
+
+
+// let lastRecDate = ['05-14-2023, 12:45', '05/14/2023, 11:45', '05/14/2023, 10:45', '05/14/2023, 9:45',
+//       '05/14/2023, 8:45', '05/14/2023, 7:45']
+
+var sectioncount=0,healthycount = 0,infected = 0;   //total numbs of sections, healthy cases, infected cases
+
 var a=0,b=0,c=0,d=0;  // 4 diseases count
 var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]  //obj ar for each disease
+
+var hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; // last 5 records info (5 cases n record time)
+var datetime;
 
 //take in array of object and then classifi them into different array
 function classifiData(data){
@@ -202,6 +259,38 @@ function classifiData(data){
         
     }
   });
+
+  last5Rec.forEach(element =>{
+    lastRecDate.push(element.time)
+    hrec.push(element.healthy.length)
+    arec.push(element.bb.length)
+    brec.push(element.bc.length)
+    crec.push(element.gm.length)
+    drec.push(element.md.length)
+  });
+
+  var currentdate = new Date(); 
+  datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " | "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+  lastRecDate.push(datetime+" (N)")
+  hrec.push(healthycount)
+  arec.push(a)
+  brec.push(b)
+  crec.push(c)
+  drec.push(d)
+
+  lastRecDate.reverse();
+  hrec.reverse();
+  arec.reverse();
+  brec.reverse();
+  crec.reverse();
+  drec.reverse();
+
 }
 
 
@@ -340,15 +429,9 @@ function showStatus(data){
 
   
 
-  var currentdate = new Date(); 
-  var datetime = "Latest Record On " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
   
-  document.getElementById("now").innerText=datetime
+  
+  document.getElementById("now").innerText="Latest Record On " + datetime
   document.getElementById("total").innerText=`Out of ${sectioncount} ${sectioncount>1?"sections ":"section "}:`
 
 }
@@ -367,17 +450,17 @@ function showPie() {
     ]
   }]
   
-  if (healthycount>0)chart_data[0].dataPoints.push({color:"lightgreen",y: `${percentageCal(healthycount)}`, label: "Healthy"})
-  if (a>0)chart_data[0].dataPoints.push({y: `${percentageCal(a)}`, label: "Bacterial Blight"})
-  if (b>0)chart_data[0].dataPoints.push({y: `${percentageCal(b)}`, label: "Brown Streak Disease"})
-  if (c>0)chart_data[0].dataPoints.push({y: `${percentageCal(c)}`, label: "Green Mottle"})
+  if (healthycount>0)chart_data[0].dataPoints.push({color:"#008FFB",y: `${percentageCal(healthycount)}`, label: "Healthy"})
+  if (a>0)chart_data[0].dataPoints.push({color:"rgb(0, 227, 150)",y: `${percentageCal(a)}`, label: "Bacterial Blight"})
+  if (b>0)chart_data[0].dataPoints.push({color:"rgb(254, 176, 25)",y: `${percentageCal(b)}`, label: "Brown Streak Disease"})
+  if (c>0)chart_data[0].dataPoints.push({color:"rgb(255, 69, 96)",y: `${percentageCal(c)}`, label: "Green Mottle"})
   if (d>0)chart_data[0].dataPoints.push({y: `${percentageCal(d)}`, label: "Mosaic Disease"})
   console.log(chart_data[0].dataPoints)
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     title: {
       text: "Cassava Farm Record",
-      color:"green"
+      fontColor: "green",
     },
     data: chart_data
     
@@ -391,6 +474,7 @@ function showPie() {
 function percentageCal(num){
   return num/sectioncount*100
 }
+
 
 //keeping the upload img source
 var imgsrc;
@@ -426,8 +510,6 @@ function readURL(input) {
     }
   }
 
-
-
 function hideEmptyCb(status){
   document.getElementById(status+"cb").setAttribute("style","display:none")
 }
@@ -449,16 +531,11 @@ function changeDisplay(status){
   }
 }
 
-
-
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
 }
-
-
-
 
 function zoomSection(isrc,sec){
   // console.log("event work")
@@ -480,96 +557,86 @@ function resetSecDisplay(){
   })
 }
 
-
-const s = '05-14-2023 12:45:00';
-const datetest = new Date(s);
-console.log(datetest)
-
-
 function showColChart(){
   var options = {
     series: [{
     name: 'Healthy',
-    data: [10, 6, 12, 14, 18, 22]
+    data: hrec
   }, {
     name: 'Bacterial Blight',
-    data: [6, 10, 6, 6, 2, 3]
+    data: arec
   }, {
     name: 'Brown Streak Disease',
-    data: [2, 4, 4, 0, 0, 0]
+    data: brec
   },{
     name: 'Green Mottle',
-    data: [0, 2, 0, 6, 4, 1]
+    data: crec
   }, {
     name: 'Mosaic Disease',
-    data: [8, 4, 4, 0, 2,0]
+    data: drec
   }],
     chart: {
-    type: 'bar',
-    height: 350,
-    stacked: true,
-    toolbar: {
-      show: true
+      type: 'bar',
+      height: 450,
+      stacked: true,
     },
-    zoom: {
-      // enabled: true
-      enabled: true
-    }
-  },
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      legend: {
-        position: 'bottom',
-        offsetX: -10,
-        offsetY: 0
-      }
-    }
-  }],
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      borderRadius: 10,
-      dataLabels: {
-        total: {
-          enabled: true,
-          style: {
-            fontSize: '13px',
-            fontWeight: 900
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          total: {
+            enabled: true,
+            offsetX: 0,
+            style: {
+              fontSize: '13px',
+              fontWeight: 900
+            }
           }
+        }
+      },
+    },
+    stroke: {
+      width: 1,
+      colors: ['#fff']
+    },
+    title: {
+      // text: 'Fiction Books Sales'
+    },
+    xaxis: {
+      categories: lastRecDate,
+      labels: {
+        formatter: function (val) {
+          return val
         }
       }
     },
-  },
-  xaxis: {
-    labels: {
-      datetimeUTC: false
+    yaxis: {
+      title: {
+        text: undefined
+      },
     },
-    type: 'datetime',
-    // categories: ['02/01/2011 20:11', '02/01/2011 20:21', '02/01/2011 20:31', '02/01/2011 20:41',
-    //   '02/01/2011 20:51', '02/01/2011 21:11'
-    // ],
-    categories: [datetest, '05/14/2023, 11:45', '05/14/2023, 10:45', '05/14/2023, 9:45',
-      '05/14/2023, 8:45', '05/14/2023, 7:45'
-    ],
-  },
-  legend: {
-    position: 'right',
-    offsetY: 40
-  },
-  fill: {
-    opacity: 1
-  }
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return val
+        }
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left',
+      offsetX: 40
+    }
   };
+
 
   var chart = new ApexCharts(document.querySelector("#colchart"), options);
   chart.render();
 
 }
-
-
-
-
 
 // reload with interval
 function pageReload(){
@@ -585,8 +652,6 @@ function pageReload(){
 }
 
 pageReload()
-
-
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("mydiv"));
@@ -635,8 +700,6 @@ function dragElement(elmnt) {
 function setDragDisplay(state){
   document.getElementById("mydiv").setAttribute("style",`display:${state}`)
 }
-
-
 
 //hover zoom
 var addZoom = target => {
@@ -699,7 +762,7 @@ window.onload = () => addZoom("zoomC");
 
 
 // const upload = async () => {
-  async function testDirect(){
+async function testDirect(){
   const inputFile = document.getElementById('input-img').files[0]
   if (inputFile) {
       const formdata = new FormData();

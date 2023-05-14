@@ -132,6 +132,7 @@ body {
     height: 500px;
     padding: 30px;
     background-attachment: fixed;
+    margin: 0px;
     
   }
 
@@ -145,10 +146,10 @@ body {
   }
 
   .title-box{
-    position: static;
+    position: fixed;
     top: 0;
     left: 0;
-
+    margin: 0px;
     height: 200px;
     
     position: relative;
