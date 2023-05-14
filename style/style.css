@@ -543,3 +543,10 @@ label {
 	
 	&:after { transform: rotate(-45deg); }
 }
+
+.compare{
+  margin: 20px;
+  font-weight: bold;
+  font-size: 30px;
+  color: #15824B;
+}

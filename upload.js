@@ -226,29 +226,32 @@ function updateHealthy(){
 
   });
 
-
 }
 
 // cuz healthy have some more stuff so me separate healthy | 4 disease
 function updateSection(secState){
-  var plural;
-  var secArray;
+  var plural,secArray,dis;
+  
   switch(secState){
     case "k":
       plural=a;
       secArray=adata;
+      dis="Bacterial Blight";
       break;
     case "l":
       plural=b;
-      secArray=bdata;
+      secArray=bdata;;
+      dis="Brown Streak Disease";
       break;
     case "c":
       plural=c;
-      secArray=cdata;
+      secArray=cdata;;
+      dis="Green Mottle";
       break;
     case "d":
       plural=d;
-      secArray=ddata;
+      secArray=ddata;;
+      dis="Mosaic Disease";
       break;
     default:
       break;
@@ -256,7 +259,7 @@ function updateSection(secState){
 
   
 
-  document.getElementById(secState+"1").innerHTML=`${plural} ${plural>1?"sections are ":"section is"} infected with ${secState}`
+  document.getElementById(secState+"1").innerHTML=`${plural} ${plural>1?"sections are ":"section is"} infected with ${dis}`
 
   
 
@@ -350,76 +353,9 @@ function showStatus(data){
 
 }
 
-// classifiData(data)
-
-//////////////////////////////////////////////////////////////////////////////////////////// 
-                              //image zoom
-
-
-// function imageZoom(imgID, resultID) {
-//   var img, lens, result, cx, cy;
-//   img = document.getElementById(imgID);
-//   console.log(img)
-//   result = document.getElementById(resultID);
-//   /*create lens:*/
-//   lens = document.createElement("DIV");
-//   lens.setAttribute("class", "img-zoom-lens");
-//   /*insert lens:*/
-//   img.parentElement.insertBefore(lens, img);
-//   /*calculate the ratio between result DIV and lens:*/
-//   cx = result.offsetWidth / lens.offsetWidth;
-//   cy = result.offsetHeight / lens.offsetHeight;
-//   /*set background properties for the result DIV:*/
-//   result.style.backgroundImage = "url('" + img.src + "')";
-//   result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
-//   /*execute a function when someone moves the cursor over the image, or the lens:*/
-//   lens.addEventListener("mousemove", moveLens);
-//   img.addEventListener("mousemove", moveLens);
-//   /*and also for touch screens:*/
-//   lens.addEventListener("touchmove", moveLens);
-//   img.addEventListener("touchmove", moveLens);
-//   function moveLens(e) {
-//     var pos, x, y;
-//     /*prevent any other actions that may occur when moving over the image:*/
-//     e.preventDefault();
-//     /*get the cursor's x and y positions:*/
-//     pos = getCursorPos(e);
-//     /*calculate the position of the lens:*/
-//     x = pos.x - (lens.offsetWidth / 2);
-//     y = pos.y - (lens.offsetHeight / 2);
-//     /*prevent the lens from being positioned outside the image:*/
-//     if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
-//     if (x < 0) {x = 0;}
-//     if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
-//     if (y < 0) {y = 0;}
-//     /*set the position of the lens:*/
-//     lens.style.left = x + "px";
-//     lens.style.top = y + "px";
-//     /*display what the lens "sees":*/
-//     result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
-//   }
-//   function getCursorPos(e) {
-//     var a, x = 0, y = 0;
-//     e = e || window.event;
-//     /*get the x and y positions of the image:*/
-//     a = img.getBoundingClientRect();
-//     /*calculate the cursor's x and y coordinates, relative to the image:*/
-//     x = e.pageX - a.left;
-//     y = e.pageY - a.top;
-//     /*consider any page scrolling:*/
-//     x = x - window.pageXOffset;
-//     y = y - window.pageYOffset;
-//     return {x : x, y : y};
-//   }
-// }
-
-//////////////////////////////////////////////////////////////////////////////////////////// 
 
 
 
-//pie chart
-
-// window.onload = function() {
 function showPie() {
   chart_data=[{
     type: "pie",
@@ -432,10 +368,10 @@ function showPie() {
   }]
   
   if (healthycount>0)chart_data[0].dataPoints.push({color:"lightgreen",y: `${percentageCal(healthycount)}`, label: "Healthy"})
-  if (a>0)chart_data[0].dataPoints.push({y: `${percentageCal(a)}`, label: "a"})
-  if (b>0)chart_data[0].dataPoints.push({y: `${percentageCal(b)}`, label: "b"})
-  if (c>0)chart_data[0].dataPoints.push({y: `${percentageCal(c)}`, label: "c"})
-  if (d>0)chart_data[0].dataPoints.push({y: `${percentageCal(d)}`, label: "d"})
+  if (a>0)chart_data[0].dataPoints.push({y: `${percentageCal(a)}`, label: "Bacterial Blight"})
+  if (b>0)chart_data[0].dataPoints.push({y: `${percentageCal(b)}`, label: "Brown Streak Disease"})
+  if (c>0)chart_data[0].dataPoints.push({y: `${percentageCal(c)}`, label: "Green Mottle"})
+  if (d>0)chart_data[0].dataPoints.push({y: `${percentageCal(d)}`, label: "Mosaic Disease"})
   console.log(chart_data[0].dataPoints)
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -514,6 +450,7 @@ function changeDisplay(status){
 }
 
 
+
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-content').hide();
@@ -543,20 +480,29 @@ function resetSecDisplay(){
   })
 }
 
+
+const s = '05-14-2023 12:45:00';
+const datetest = new Date(s);
+console.log(datetest)
+
+
 function showColChart(){
   var options = {
     series: [{
-    name: 'PRODUCT 1',
-    data: [44, 55, 41, 67, 22, 43]
+    name: 'Healthy',
+    data: [10, 6, 12, 14, 18, 22]
   }, {
-    name: 'PRODUCT 2',
-    data: [13, 23, 20, 8, 13, 27]
+    name: 'Bacterial Blight',
+    data: [6, 10, 6, 6, 2, 3]
   }, {
-    name: 'PRODUCT 3',
-    data: [11, 17, 15, 15, 21, 14]
+    name: 'Brown Streak Disease',
+    data: [2, 4, 4, 0, 0, 0]
+  },{
+    name: 'Green Mottle',
+    data: [0, 2, 0, 6, 4, 1]
   }, {
-    name: 'PRODUCT 4',
-    data: [21, 7, 25, 13, 22, 8]
+    name: 'Mosaic Disease',
+    data: [8, 4, 4, 0, 2,0]
   }],
     chart: {
     type: 'bar',
@@ -566,6 +512,7 @@ function showColChart(){
       show: true
     },
     zoom: {
+      // enabled: true
       enabled: true
     }
   },
@@ -595,9 +542,15 @@ function showColChart(){
     },
   },
   xaxis: {
+    labels: {
+      datetimeUTC: false
+    },
     type: 'datetime',
-    categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-      '01/05/2011 GMT', '01/06/2011 GMT'
+    // categories: ['02/01/2011 20:11', '02/01/2011 20:21', '02/01/2011 20:31', '02/01/2011 20:41',
+    //   '02/01/2011 20:51', '02/01/2011 21:11'
+    // ],
+    categories: [datetest, '05/14/2023, 11:45', '05/14/2023, 10:45', '05/14/2023, 9:45',
+      '05/14/2023, 8:45', '05/14/2023, 7:45'
     ],
   },
   legend: {
