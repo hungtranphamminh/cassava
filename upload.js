@@ -728,6 +728,11 @@ function updateChart(){
   window.resizeTo(2216-10,1069-10)
 }
 
+function updateCurrent(){
+  var disList =["healthy","a","b","c","d"]
+  //data[0].status =disList[Math.floor(Math.random() * disList.length)]
+  console.log(disList[Math.floor(Math.random() * disList.length)])
+}
 
 // reload with interval
 function pageReload(){
@@ -737,6 +742,7 @@ function pageReload(){
   recover=[],newa=[],newb=[],newc=[],newd=[];
   hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
   
+  getRecord()
   resetSecDisplay()
   classifiData(data)
   showPie()
@@ -880,3 +886,16 @@ async function testDirect(){
   }
   else console.log('Empty file input')
 }
+
+async function getRecord(){
+  
+  const formdata = new FormData();
+  const res = await fetch('http://127.0.0.1:8000/records/', {
+    method: 'POST',
+    redirect: 'follow',
+    mode: 'cors',
+  });
+  data = await res.json();
+  console.log(data);
+}
+  
