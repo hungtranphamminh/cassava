@@ -881,21 +881,17 @@ async function testDirect(){
         redirect: 'follow',
         mode: 'cors',
       });
-      data = await res.json();
-      console.log(data);
+      data1 = await res.json();
+      console.log(data1);
   }
   else console.log('Empty file input')
 }
 
 async function getRecord(){
-  
-  const formdata = new FormData();
   const res = await fetch('http://127.0.0.1:8000/records/', {
-    method: 'POST',
-    redirect: 'follow',
-    mode: 'cors',
+    method: 'GET',
   });
-  data = await res.json();
-  console.log(data);
+  data2 = await res.json();
+  console.log(data2);
 }
   
