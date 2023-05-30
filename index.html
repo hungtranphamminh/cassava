@@ -38,7 +38,7 @@
                 <div id="zoomC"></div>
             </div>
             
-            <button onclick="pageReload()">Reload page to test</button>
+            
             <input type="button" value="" onclick="window.open('http://127.0.0.1:5500/index.html', 'mywindow', 'width=500, height=400')"  />
             <div class="main-content">
                 
@@ -47,11 +47,23 @@
                     <div class="status-box">
                         <div class="summary-title">Brief Summary</div>
                         <div class="status-summary">
-                            <div id="now" class="now"></div>
+                            <div id="sum-time">
+                                <div id="now" class="now"></div>
+                                
+                            </div>
+                            
                             <div id="total"></div>
                             <div id="hsum" class="hsum"></div>
                             <div id="in-sum" class="in-sum">
                             </div>
+                            <div id="bottom-button">
+                                <!-- <button id="now-but" onclick="pageReload()">Get current record</button>   -->
+                                <input class="now-btn" id="now-but" onclick="pageReload()" type="button" value="Get current record"/>
+                                <!-- <div>
+                                    Next record in:
+                                </div> -->
+                            </div>
+                            
                         </div> 
                         <div class="chart-summary" style="height: 370px; width: 50%;" id="chartContainer">
                         </div>
@@ -219,14 +231,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- <div class="test-direct">
                     <img src="" id="directthis">
                 </div> -->
 
             </div>
         </div>
-        
+        <div>
+            <img id="img-get"/>
+        </div>
 
         
     </body>

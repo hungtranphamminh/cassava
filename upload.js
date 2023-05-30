@@ -164,44 +164,44 @@ let data = [
 
 let last5Rec =[
   {
-    "time":"14/5/2023 | 8:15:44",
-    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-    "bb":[21,22],
-    "bc":[23,24],
-    "gm":[25,26],
-    "md":[]
+    time:"14/5/2023 | 8:15:44",
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    bb:[21,22],
+    bc:[23,24],
+    gm:[25,26],
+    md:[]
   },
   {
-    "time":"14/5/2023 | 9:15:44",
-  "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-  "bb":[21,22],
-  "bc":[23,24],
-  "gm":[25,26],
-  "md":[]
+    time:"14/5/2023 | 9:15:44",
+  healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+  bb:[21,22],
+  bc:[23,24],
+  gm:[25,26],
+  md:[]
   },
   {
-    "time":"14/5/2023 | 10:15:44",
-    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
-    "bb":[21,22],
-    "bc":[19,20,23,24],
-    "gm":[25,26],
-    "md":[]
+    time:"14/5/2023 | 10:15:44",
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    bb:[21,22],
+    bc:[19,20,23,24],
+    gm:[25,26],
+    md:[]
   },
   {
-    "time":"14/5/2023 | 11:15:44",
-    "healthy":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
-    "bb":[21,22,17,18],
-    "bc":[19,20,23,24],
-    "gm":[25,26],
-    "md":[]
+    time:"14/5/2023 | 11:15:44",
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+    bb:[21,22,17,18],
+    bc:[19,20,23,24],
+    gm:[25,26],
+    md:[]
   },
   {
-    "time":"14/5/2023 | 12:15:44",
-    "healthy":[1,2,3,4,5,6,7,8,9,14,15,16],
-    "bb":[21,22,17,18],
-    "bc":[23,24,19,20],
-    "gm":[25,26],
-    "md":[10,11,12,13,]
+    time:"14/5/2023 | 12:15:44",
+    healthy:[1,2,3,4,5,6,7,8,9,14,15,16],
+    bb:[21,22,17,18],
+    bc:[23,24,19,20],
+    gm:[25,26],
+    md:[10,11,12,13,]
   }
 ]
 
@@ -509,7 +509,8 @@ function showStatus(data){
 
   
   
-  document.getElementById("now").innerText="Latest Record On " + datetime
+  // document.getElementById("now").innerText="Record On " + datetime
+  document.getElementById("now").innerHTML="Record On " + `${datetime}`
   document.getElementById("total").innerText=`Out of ${sectioncount} ${sectioncount>1?"sections ":"section "}:`
 
 }
@@ -742,7 +743,9 @@ function pageReload(){
   recover=[],newa=[],newb=[],newc=[],newd=[];
   hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
   
+  getSec()
   getRecord()
+  postRec()
   resetSecDisplay()
   classifiData(data)
   showPie()
@@ -751,6 +754,9 @@ function pageReload(){
   window.resizeTo(2016,969)
   updateChart()
   
+
+  getClassRes()
+
   // chart1.render();
   
   console.log(healthycount)
@@ -875,7 +881,7 @@ async function testDirect(){
   if (inputFile) {
       const formdata = new FormData();
       formdata.append('file', inputFile, inputFile.name);
-      const res = await fetch('http://127.0.0.1:8000/classfication/', {
+      const res = await fetch('http://192.168.21.245:8000/classfication/', {
         method: 'POST',
         body: formdata,
         redirect: 'follow',
@@ -888,10 +894,82 @@ async function testDirect(){
 }
 
 async function getRecord(){
-  const res = await fetch('http://127.0.0.1:8000/records/', {
-    method: 'GET',
-  });
-  data2 = await res.json();
-  console.log(data2);
+  // const res = await fetch('http://192.168.21.245:8000/records/', {
+  //   method: 'GET',
+  // });
+  // data2 = await res.json();
+  // console.log(data2);
 }
+
+async function getSec(){
+  // // const res = await fetch('http://192.168.46.122:5050/saved-photo/',{
+  // //   method:'GET'
+  // // });
+  // // imgdata=await res;
+  // // console.log("img");
+  // // console.log(imgdata.body)
+  // // data[0].src='http://192.168.20.142:5050'
+
+  // console.log(1)
+  // await fetch('http://192.168.20.142:5050/saved-photo/',{
+  //   method:'GET',
+  // })
+  // .then((response) => {
+  //   const reader= response.body.getReader();
+  //   return new ReadableStream({
+  //     start(controller){
+  //       return pump();
+  //       function pump(){
+  //         return reader.read().then(({done,value})=>{
+  //           if(done){
+  //             controller.close();
+  //             return;
+  //           }
+  //           controller.enqueue(value)
+  //           return pump()
+  //         })
+  //       }
+  //     }
+  //   })
+  // })
+  // .then((stream)=>new Response(stream))
+  // .then((response)=>response.blob())
+  // .then((url)=>{
+  //   console.log(url)
+  //   document.getElementById("img-get").src=window.URL.createObjectURL(url)
+  // })
+  // .catch((err)=>console.error(err))
+  // // console.log("this right here",res)
+  // console.log("finish get image")
+}
+
+async function postRec(){
+  // console.log(last5Rec)
+  // const formdata = new FormData()
+  // // const postRec = JSON.stringify("last5Rec")
+  // formdata.append('data', JSON.stringify(last5Rec))
+  // console.log(postRec)
+  // const res=await fetch('http://192.168.21.245:8000/records/', {
+  //   method:'POST',
+  //   body: formdata
+  // });
+  // const contentP = await res.json();
+  // console.log(contentP)
+  // console.log('call postReac')
+}
+
+async function getClassRes(){
+  const res = await fetch('http://192.168.21.245:8000/remote-classification/',{
+    method:'GET',
+  });
+  const convData = await res.json()
+  console.log('api data: ',(convData['Img']))
+  document.getElementById('img-get').src=`data:image/png;base64,${convData['Img']}`
+  data[0].src=`data:image/png;base64,${convData['Img']}`
+  // console.log('convert data: ',btoa(convData['Img'])) 
+
+  // const delay = ms => new Promise(res => setTimeout(res, ms));
   
+  // document.getElementById('img-get').src=`data:image/png;base64,${btoa(convData['img'])}`
+  console.log(1)
+}
