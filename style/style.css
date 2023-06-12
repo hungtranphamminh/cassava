@@ -7,7 +7,7 @@ body {
   .file-upload {
     background-color: #ffffff;
     width: 600px;
-    margin: 0 auto;
+    margin: 0 60px;
     padding: 20px;
 
   }
@@ -173,12 +173,13 @@ body {
   }
 
   .hsum{
-    color: #1FB264;
+    color: #999;
+    /* color: #15824B; */
 
     
   }
   .in-sum{
-    color:#c13b2a;
+    color:#999;
 
   }
 
@@ -262,8 +263,9 @@ body {
   }
   
   .hsum,.in-sum{
-    text-align: center;
+    text-align: left;
     margin-top: 30px;
+    margin-left: 90px;
     
   }
 
@@ -680,3 +682,29 @@ label {
   border-radius: 0px 0px 15px 15px;
   
 }
+
+#green-dot{
+  color: #15824B;
+}
+
+#red-dot{
+  color: #c13b2a;
+}
+
+#custom-res{
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20%;
+  color: #999;
+}
+
+#res-status{
+  color: #c13b2a;
+}
+
+#mosaic{
+  color:rgb(119, 93, 208)
+}
+
+

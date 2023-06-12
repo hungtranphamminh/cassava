@@ -160,11 +160,11 @@ let data = [
 
 ] 
 
-//
+//    
 
 let last5Rec =[
   {
-    time:"14/5/2023 | 8:15:44",
+    time:"14/5/2023 | 10:15:44",
     healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
     bb:[21,22],
     bc:[23,24],
@@ -172,7 +172,7 @@ let last5Rec =[
     md:[]
   },
   {
-    time:"14/5/2023 | 9:15:44",
+    time:"14/5/2023 | 11:15:44",
   healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
   bb:[21,22],
   bc:[23,24],
@@ -180,7 +180,7 @@ let last5Rec =[
   md:[]
   },
   {
-    time:"14/5/2023 | 10:15:44",
+    time:"14/5/2023 | 12:15:44",
     healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
     bb:[21,22],
     bc:[19,20,23,24],
@@ -188,7 +188,7 @@ let last5Rec =[
     md:[]
   },
   {
-    time:"14/5/2023 | 11:15:44",
+    time:"14/5/2023 | 13:15:44",
     healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
     bb:[21,22,17,18],
     bc:[19,20,23,24],
@@ -196,7 +196,7 @@ let last5Rec =[
     md:[]
   },
   {
-    time:"14/5/2023 | 12:15:44",
+    time:"14/5/2023 | 14:15:44",
     healthy:[1,2,3,4,5,6,7,8,9,14,15,16],
     bb:[21,22,17,18],
     bc:[23,24,19,20],
@@ -209,12 +209,10 @@ let last5Rec =[
 
 
 
+var cameraSource,secNumber=1;
 
 
 
-
-// let lastRecDate = ['05-14-2023, 12:45', '05/14/2023, 11:45', '05/14/2023, 10:45', '05/14/2023, 9:45',
-//       '05/14/2023, 8:45', '05/14/2023, 7:45']
 
 var sectioncount=0,healthycount = 0,infected = 0;   //total numbs of sections, healthy cases, infected cases
 
@@ -337,23 +335,37 @@ function classifiData(data){
 
 
 function updateHealthy(){
-  document.getElementById("hsum").innerText=`${healthycount} ${healthycount>1?" sections are ":"section is "} healthy `;
+  document.getElementById("hsum").innerHTML=`<span id=green-dot>&#x2022; </span>${healthycount} ${healthycount>1?" sections are ":"section is "} <span style="color:#15824B">healthy</span> `;
   document.getElementById("hl1").innerHTML=`${healthycount} ${healthycount>1?"sections are ":"section is"} in a healthy state`
 
+  var count=0
   hdata.forEach(element=>{
+    count=count+1
     
     let sid=element.sec.toString()
     var onClickParam = element.src
     
-    onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
+    
     
 
+    
+
+    // if(count!==1){
+    onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
     document.getElementById("hl2").innerHTML+=`
-      <div class="img-block">
-        <img id=${sid} src=${element.src} class="s-img" onclick='${onClickParam}'>
-        <div class="sec-name">Section ${element.sec}</div>
-      </div>
+    <div class="img-block">
+      <img id=${sid} src=${element.src} class="s-img" onclick='${onClickParam}'>
+      <div class="sec-name">Section ${element.sec}</div>
+    </div>
     `
+    // }
+    // else{
+    //   document.getElementById("hl2").innerHTML+=`
+    //   <div class="img-block">
+    //     <img id=${sid} src=${element.src} class="s-img" >
+    //     <div class="sec-name">Section ${element.sec}</div>
+    //   </div>`
+    // }
 
   });
 
@@ -363,6 +375,8 @@ function updateHealthy(){
 function updateSection(secState){
   var plural,secArray,dis;
   
+  console.log("update section ",secState)
+
   switch(secState){
     case "k":
       plural=a;
@@ -388,7 +402,7 @@ function updateSection(secState){
       break;
   }
 
-  
+  console.log("test update section: ",secArray)
 
   document.getElementById(secState+"1").innerHTML=`${plural} ${plural>1?"sections are ":"section is"} infected with ${dis}`
 
@@ -403,7 +417,7 @@ function updateSection(secState){
 
     document.getElementById(secState+"2").innerHTML+=`
       <div class="img-block">
-        <img src=${element.src} class="s-img" onclick='${onClickParam}'>
+        <img id=${element.sec.toString()} src=${element.src} class="s-img" onclick='${onClickParam}'>
         <div class="sec-name">Section ${element.sec}</div>
       </div>
     `
@@ -411,10 +425,11 @@ function updateSection(secState){
 }
 
 
+
 //show summary as well as section status
 function showStatus(data){
 
-  // console.log(healthycount)
+  
   if (healthycount!==0){
     document.getElementById("hl").style.display="flex"
     updateHealthy()
@@ -425,7 +440,7 @@ function showStatus(data){
     document.getElementById("hl").style.display="none"
   }
   if (infected!==0){
-    document.getElementById("in-sum").innerText=`${infected} ${infected>1?" sections are ":"section is "} infected `;
+    document.getElementById("in-sum").innerHTML=`<span id="red-dot">&#x2022; </span> <span>${infected}</span> ${infected>1?" sections are ":"section is "} <span style="color:#c13b2a">infected </span>`;
   }
 
   if (a!==0){
@@ -595,11 +610,36 @@ function hideEmptyCb(status){
 
 function changeDisplay(status){
   // console.log(status)
+  
   document.getElementById(status+"cb").setAttribute("style","display:flex")
   
+  let checkBoxName
+
+  switch(status){
+    case "hl":
+      checkBoxName="check1"
+      break
+    case "k":
+      checkBoxName="check2"
+      break
+    case "l":
+      checkBoxName="check3"
+      break
+    case "c":
+      checkBoxName="check4"
+      break
+    case "d":
+      checkBoxName="check5"
+      break
+    default:break
+
+  }
+
+  console.log(document.getElementById(checkBoxName).checked)
+
 
   var displaySec = document.getElementById(status)
-  if (displaySec.style.display!=="none")displaySec.setAttribute("style","display:none")
+  if (displaySec.style.display!=="none" && (!document.getElementById(checkBoxName).checked) )displaySec.setAttribute("style","display:none")
   else {
     if ((status==="hl" && healthycount!==0)||
     (status==="k"&&a!==0)||
@@ -743,29 +783,73 @@ function pageReload(){
   recover=[],newa=[],newb=[],newc=[],newd=[];
   hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
   
-  getSec()
-  getRecord()
-  postRec()
+
+ 
+  
+  // getRecord()    get record from api
+  // postRec()      post record to api
+  // reset section display
   resetSecDisplay()
+  // classifidata into hdata, adata, bdata
   classifiData(data)
+  // show pie chart
   showPie()
+  console.log("check data here",data)
+  console.log("check hdata here",hdata)
+  // show status table
   showStatus(data)
+  // show column  chart
   showColChart()
   window.resizeTo(2016,969)
   updateChart()
   
-
-  getClassRes()
-
-  // chart1.render();
-  
-  console.log(healthycount)
-  console.log(window.innerHeight)
-  // console.log(document.getElementById("b"))
+  // console.log(document.getElementById("img-get-test"))
   
 }
 
+
+
+
+//call first time
 pageReload()
+
+
+function reloadIntent(){
+  healthycount=0,infected=0,a=0,b=0,c=0,d=0,sectioncount=0
+  hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; 
+  datetime;
+  recover=[],newa=[],newb=[],newc=[],newd=[];
+  hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
+  resetSecDisplay()
+  getClassRes()
+
+  console.log("test reload intent:",data)
+  
+  classifiData(data)
+
+  console.log("test adata",adata)
+  console.log("test hdata",hdata)
+
+  showPie()
+  showStatus(data)
+  showColChart()
+  updateFromCamera()
+}
+
+function updateFromCamera(){
+  console.log("update from camera here")
+  // console.log(document.getElementById("img-get-test"))
+
+  // document.getElementById('img-get-test').src=cameraSource
+  data[0].src=cameraSource
+  
+  document.getElementById('1').src=cameraSource
+  
+  document.getElementById("1").addEventListener('click',function(e){zoomSection(`${cameraSource}`,"1")})
+}
+
+
+reloadIntent()
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("mydiv"));
@@ -874,13 +958,45 @@ window.onload = () => addZoom("zoomC");
 
 
 
+function changeDirect(direcRes){
+  if (direcRes=== "healthy"){
+    document.getElementById("custom-res").innerHTML=`<span style="color:#15824B">Healthy</span>`
+  }
+  else{
+    let direcStatus="";
+    document.getElementById("custom-res").innerHTML=
+    `<span id="res-status">Infected</span> with <span id="mosaic">${direcStatus}</span> `
+
+
+    switch(direcRes){
+      case "a":
+        direcStatus="Bacterial Blight";
+        document.getElementById("mosaic").style="color:#483D8B"
+        break;
+      case "b":
+        direcStatus="Brown Streak";
+        document.getElementById("mosaic").style="color:rgb(254, 176, 25)"
+        break;
+      case "c":
+        direcStatus="Green Mottle";
+        document.getElementById("mosaic").style="color:rgb(255, 69, 96)"
+        break;
+      case "d":
+        direcStatus="Mosaic";
+        document.getElementById("mosaic").style="color:rgb(119, 93, 208)"
+        break;  
+    }
+
+  }
+}
+
 
 // const upload = async () => {
 async function testDirect(){
   const inputFile = document.getElementById('input-img').files[0]
   if (inputFile) {
       const formdata = new FormData();
-      formdata.append('file', inputFile, inputFile.name);
+      formdata.append('file', inputFile, inputFile.name); 
       const res = await fetch('http://192.168.21.245:8000/classfication/', {
         method: 'POST',
         body: formdata,
@@ -889,59 +1005,25 @@ async function testDirect(){
       });
       data1 = await res.json();
       console.log(data1);
+
+      // continue here
+      direcRes("healthy")
+
   }
   else console.log('Empty file input')
 }
 
+
+
+//get last 5 records works
 async function getRecord(){
-  // const res = await fetch('http://192.168.21.245:8000/records/', {
-  //   method: 'GET',
-  // });
-  // data2 = await res.json();
-  // console.log(data2);
+  const res = await fetch('http://192.168.152.219:8000/records/', {
+    method: 'GET',
+  });
+  data2 = await res.json();
+  console.log("get record here", data2);
 }
 
-async function getSec(){
-  // // const res = await fetch('http://192.168.46.122:5050/saved-photo/',{
-  // //   method:'GET'
-  // // });
-  // // imgdata=await res;
-  // // console.log("img");
-  // // console.log(imgdata.body)
-  // // data[0].src='http://192.168.20.142:5050'
-
-  // console.log(1)
-  // await fetch('http://192.168.20.142:5050/saved-photo/',{
-  //   method:'GET',
-  // })
-  // .then((response) => {
-  //   const reader= response.body.getReader();
-  //   return new ReadableStream({
-  //     start(controller){
-  //       return pump();
-  //       function pump(){
-  //         return reader.read().then(({done,value})=>{
-  //           if(done){
-  //             controller.close();
-  //             return;
-  //           }
-  //           controller.enqueue(value)
-  //           return pump()
-  //         })
-  //       }
-  //     }
-  //   })
-  // })
-  // .then((stream)=>new Response(stream))
-  // .then((response)=>response.blob())
-  // .then((url)=>{
-  //   console.log(url)
-  //   document.getElementById("img-get").src=window.URL.createObjectURL(url)
-  // })
-  // .catch((err)=>console.error(err))
-  // // console.log("this right here",res)
-  // console.log("finish get image")
-}
 
 async function postRec(){
   // console.log(last5Rec)
@@ -958,18 +1040,70 @@ async function postRec(){
   // console.log('call postReac')
 }
 
+
+
 async function getClassRes(){
-  const res = await fetch('http://192.168.21.245:8000/remote-classification/',{
-    method:'GET',
-  });
-  const convData = await res.json()
-  console.log('api data: ',(convData['Img']))
-  document.getElementById('img-get').src=`data:image/png;base64,${convData['Img']}`
-  data[0].src=`data:image/png;base64,${convData['Img']}`
+  // const res = await fetch('http://192.168.152.219:8000/remote-classification/',{
+  //   method:'GET',
+  // });
+  // const convData = await res.json()
+
+  // console.log('res',convData['Class'])
+  // console.log('api data: ',(convData['Img']))
+  
+  // document.getElementById('img-get').src=`data:image/png;base64,${convData['Img']}`
+  // data[0].src=`data:image/png;base64,${convData['Img']}`
+  
+  // document.getElementById('1').src=`data:image/png;base64,${convData['Img']}`
+
+  let convData = {
+    Class:"healthy",
+    Img:"https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/h/h/hh_1__1.png"
+  }
+
+  cameraSource = convData['Img']
+
+  switch(convData['Class']){
+    case "cbb":
+      data[0].status="a"
+      break
+    case "cbsd":
+      data[0].status="b"
+      break
+    case "cgm":
+      data[0].status="c"
+      break
+    case "cmd":
+      data[0].status="d"
+      break
+    case "healthy":
+      data[0].status="healthy"
+      break
+    default: break
+  }
+
+  console.log("test data:",data)
+
+  // let showImg = document.getElementById('1')
+  // showImg.addEventListener('click',function(e){zoomSection(`${showImg.src}`,"1")})
+  // working here
+
+  // document.getElementById('1').onclick=`zoomSection("${showImg.src}","1")`
+  
   // console.log('convert data: ',btoa(convData['Img'])) 
 
   // const delay = ms => new Promise(res => setTimeout(res, ms));
   
   // document.getElementById('img-get').src=`data:image/png;base64,${btoa(convData['img'])}`
-  console.log(1)
+  console.log("image change")
 }
+
+
+
+
+
+function testCall(){
+  console.log("Call")
+}
+
+
