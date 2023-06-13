@@ -220,11 +220,11 @@ var hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; // last 5 records in
 var datetime;
 // var recover=[],newa=[],newb=[],newc=[],newd=[];
 var newa=[],newb=[],newc=[],newd=[];
-
+var curh=[],cura=[],curb=[],curc=[],curd=[];
 
 //take in array of object and then classifi them into different array
 function classifiData(data){
-  var curh=[],cura=[],curb=[],curc=[],curd=[];
+  curh=[],cura=[],curb=[],curc=[],curd=[]
   
 
   let recover = new Array()
@@ -269,6 +269,19 @@ function classifiData(data){
     }
   });
 
+  var currentdate = new Date(); 
+  datetime = currentdate.getDate() + "/"
+  + (currentdate.getMonth()+1)  + "/" 
+  + currentdate.getFullYear() + " | "  
+  + currentdate.getHours() + ":"  
+  + currentdate.getMinutes() + ":" 
+  + currentdate.getSeconds();
+  
+  
+  
+  // console.log("test datetime: ",prevH)
+
+
   last5Rec.forEach(element =>{
     lastRecDate.push(element.time)
     hrec.push(element.healthy.length)
@@ -278,13 +291,8 @@ function classifiData(data){
     drec.push(element.md.length)
   });
 
-  var currentdate = new Date(); 
-  datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " | "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+  
+
 
   lastRecDate.push(datetime+" (N)")
   hrec.push(healthycount)
@@ -833,7 +841,19 @@ function pageReload(){
 
 
 
-
+function appendLastRec(){
+  last5Rec.shift()
+  console.log("after shift",last5Rec)
+  
+  last5Rec.push({
+      time:datetime,
+      healthy:curh,
+      bb:cura,
+      bc:curb,
+      gm:curc,
+      md:curd
+    })
+}
 
 
 function reloadIntent(){
@@ -843,11 +863,13 @@ function reloadIntent(){
   recover=[],newa=[],newb=[],newc=[],newd=[];
   hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
   resetSecDisplay()
+  
   getClassRes()
 
   console.log("test reload intent:",data)
   
   classifiData(data)
+  appendLastRec()
 
   console.log("test adata",adata)
   console.log("test hdata",hdata)
@@ -1140,6 +1162,30 @@ function testCall(){
 
 
 //call first time
-pageReload()
+
 //test reload button
 // reloadIntent()
+
+function change5RecData(){
+  let recIndex=5
+  last5Rec.forEach(element=>{
+    let tempDate = new Date()
+    
+    prevH = tempDate.getDate() + "/"
+    + (tempDate.getMonth()+1)  + "/" 
+    + tempDate.getFullYear() + " | "  
+    + (tempDate.getHours()-recIndex) + ":"  
+    + tempDate.getMinutes() + ":" 
+    + tempDate.getSeconds();
+    recIndex-=1
+
+    element.time= prevH.toString()
+  })
+}
+
+function loadPage(){
+  change5RecData()
+  pageReload()
+}
+
+loadPage()
