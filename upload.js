@@ -1,116 +1,118 @@
 
+let testing=1
+
 //sections's data
 let data = [
   {
     "status":"healthy",
     "prob":0.9,
     "src":"/image/test.jpg",
-    "sec":"1"
+    "sec":1
   },
   {
     "status":"healthy",
     "prob":0.7,
     "src":"/image/test.jpg",
-    "sec":"2"
+    "sec":2
   },
   {
     "status":"healthy",
     "prob":0.6,
     "src":"/image/rwanda_story.jpeg",
-    "sec":"3"
+    "sec":3
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.7,
     "src":"/image/test.jpg",
-    "sec":"4"
+    "sec":4
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":"5"
+    "sec":5
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":"6"
+    "sec":6
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":"7"
+    "sec":7
   },
   {
     "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":"8"
+    "sec":8
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
-    "sec":"9"
+    "sec":9
   },
   {
-    "status":"b",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":10
   },
   {
-    "status":"c",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":11
   },
   {
-    "status":"d",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":12
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":13
   },
   {
-    "status":"b",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":14
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":15
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":16
   },
   {
-    "status":"d",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":17
   },
   {
-    "status":"a",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":18
   },
   {
-    "status":"d",
+    "status":"healthy",
     "prob":0.3,
     "src":"/image/test.jpg",
     "sec":19
@@ -122,37 +124,37 @@ let data = [
     "sec":20
   },
   {
-    "status":"healthy",
+    "status":"a",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":21
   },
   {
-    "status":"healthy",
+    "status":"a",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":22
   },
   {
-    "status":"healthy",
+    "status":"b",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":23
   },
   {
-    "status":"healthy",
+    "status":"b",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":24
   },
   {
-    "status":"healthy",
+    "status":"c",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":25
   },
   {
-    "status":"healthy",
+    "status":"c",
     "prob":0.9,
     "src":"/image/test.jpg",
     "sec":26
@@ -181,37 +183,32 @@ let last5Rec =[
   },
   {
     time:"14/5/2023 | 12:15:44",
-    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
     bb:[21,22],
-    bc:[19,20,23,24],
+    bc:[23,24],
     gm:[25,26],
     md:[]
   },
   {
     time:"14/5/2023 | 13:15:44",
-    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
-    bb:[21,22,17,18],
-    bc:[19,20,23,24],
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    bb:[21,22],
+    bc:[23,24],
     gm:[25,26],
     md:[]
   },
   {
     time:"14/5/2023 | 14:15:44",
-    healthy:[1,2,3,4,5,6,7,8,9,14,15,16],
-    bb:[21,22,17,18],
-    bc:[23,24,19,20],
+    healthy:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    bb:[21,22],
+    bc:[23,24],
     gm:[25,26],
-    md:[10,11,12,13,]
+    md:[]
   }
 ]
 
 
-
-
-
 var cameraSource,secNumber=1;
-
-
 
 
 var sectioncount=0,healthycount = 0,infected = 0;   //total numbs of sections, healthy cases, infected cases
@@ -221,12 +218,17 @@ var adata=[],bdata=[],cdata=[],ddata=[],hdata=[]  //obj ar for each disease
 
 var hrec=[],arec=[],brec=[],crec=[],drec=[],lastRecDate=[]; // last 5 records info (5 cases n record time)
 var datetime;
-var recover=[],newa=[],newb=[],newc=[],newd=[];
+// var recover=[],newa=[],newb=[],newc=[],newd=[];
+var newa=[],newb=[],newc=[],newd=[];
 
 
 //take in array of object and then classifi them into different array
 function classifiData(data){
   var curh=[],cura=[],curb=[],curc=[],curd=[];
+  
+
+  let recover = new Array()
+  console.log("What is this:",recover)
   data.forEach(element => {
     sectioncount+=1
     
@@ -298,21 +300,37 @@ function classifiData(data){
   crec.reverse();
   drec.reverse();
 
+  console.log("current healthy",curh)
+  console.log("last record healthy",last5Rec[4].healthy)
+  console.log("current bb: ",cura)
+  console.log("last record bb: ",last5Rec[4].bb)
+
+
+
   curh.forEach(section =>{
-    if (!(section in last5Rec[4].healthy))recover.push(section)
+    if (!(last5Rec[4].healthy.includes(section))){
+      recover.push(section)
+      console.log(section, "has recovered")
+    }
   });
+  console.log("recovered: ",recover)
+
   cura.forEach(section =>{
-    if (!(section in last5Rec[4].bb))newa.push(section)
+    if (!(last5Rec[4].bb.includes(section)))newa.push(section)
   });
+  console.log("newa: ",newa)
   curb.forEach(section =>{
-    if (!(section in last5Rec[4].bc))newb.push(section)
+    if (!(last5Rec[4].bc.includes(section)))newb.push(section)
   });
+  console.log("newb:",newb)
   curc.forEach(section =>{
-    if (!(section in last5Rec[4].gm))recover.push(section)
+    if (!(last5Rec[4].gm.includes(section)))newc.push(section)
   });
+  console.log("newc: ",newc)
   curd.forEach(section =>{
-    if (!(section in last5Rec[4].md))recover.push(section)
+    if (!(last5Rec[4].md.includes(section)))newd.push(section)
   });
+  console.log("newd:",newd)
 
   recover.sort()
   newa.sort()
@@ -320,14 +338,17 @@ function classifiData(data){
   newc.sort()
   newd.sort()
 
-  console.log(curh)
+  
+
+
+  // console.log(curh)
   // console.log(last5Rec[4].healthy)
-  console.log("check new")
-  console.log(recover)
-  console.log(newa)
-  console.log(newb)
-  console.log(newc)
-  console.log(newd)
+  // console.log("check new")
+  // console.log(recover)
+  // console.log(newa)
+  // console.log(newb)
+  // console.log(newc)
+  // console.log(newd)
   
   
   
@@ -344,13 +365,7 @@ function updateHealthy(){
     
     let sid=element.sec.toString()
     var onClickParam = element.src
-    
-    
-    
 
-    
-
-    // if(count!==1){
     onClickParam="zoomSection(\""+onClickParam+"\",\""+element.sec+"\")"
     document.getElementById("hl2").innerHTML+=`
     <div class="img-block">
@@ -358,15 +373,6 @@ function updateHealthy(){
       <div class="sec-name">Section ${element.sec}</div>
     </div>
     `
-    // }
-    // else{
-    //   document.getElementById("hl2").innerHTML+=`
-    //   <div class="img-block">
-    //     <img id=${sid} src=${element.src} class="s-img" >
-    //     <div class="sec-name">Section ${element.sec}</div>
-    //   </div>`
-    // }
-
   });
 
 }
@@ -484,14 +490,28 @@ function showStatus(data){
   }
 
   if (newa.length || newb.length || newc.length|| newd.length|| recover.length){
-    if (recover.length>0)document.getElementById("recv").innerHTML=`${recover.length>1?`Section ${recover} have`:`Sections ${recover} has`} <span id="recg">recovered</span>`
+    document.getElementById("compare-status").style.display="block"
+    document.getElementById("nonew").style.display = "none"
+
+    /* 
+    test recover
+    */
+    // recover=[100]
+
+    if (recover.length>0){
+      document.getElementById("recv").innerHTML=`${recover.length>1?`Section ${recover} have`:`Sections ${recover} has`} <span id="recg">recovered</span>`
+      document.getElementById("recv").style.display="list-item"
+    }
+    else{
+      document.getElementById("recv").style.display="none"
+    }
     if (newa.length || newb.length || newc.length|| newd.length){
       document.getElementById("newi").innerHTML=
       `${newa.length + newb.length +newc.length +newd.length} ${(newa.length + newb.length +newc.length +newd.length)>1?"Sections are ":"Section is "}<span id="newr">infected</span> recently:`
     }
     if (newa.length){
       document.getElementById("newa").setAttribute("style","display:li")
-      document.getElementById("newa").innerHTML=`${newa.length>1?`Section ${newa} are`:`Sections ${newa} is`} <span id="newr">infected</span> with <span id="newr-a">Bacterial Blight</span>`
+      document.getElementById("newa").innerHTML=`${newa.length>1?`Sections ${newa} are`:`Section ${newa} is`} <span id="newr">infected</span> with <span id="newr-a">Bacterial Blight</span>`
     }
     else{
       document.getElementById("newa").setAttribute("style","display:none")
@@ -519,6 +539,8 @@ function showStatus(data){
     }
   }
   else{
+    document.getElementById("compare-status").style.display="none"
+    document.getElementById("nonew").style.display = "block"
     document.getElementById("nonew").innerHTML=`There are no new changes in the sections's status.`
   }
 
@@ -654,6 +676,7 @@ function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
+    clearDirectRes()
 }
 
 function zoomSection(isrc,sec){
@@ -784,11 +807,12 @@ function pageReload(){
   hdata=[],adata=[],bdata=[],cdata=[],ddata=[];
   
 
- 
+  clearDirectRes()
   
   // getRecord()    get record from api
   // postRec()      post record to api
   // reset section display
+
   resetSecDisplay()
   // classifidata into hdata, adata, bdata
   classifiData(data)
@@ -810,8 +834,6 @@ function pageReload(){
 
 
 
-//call first time
-pageReload()
 
 
 function reloadIntent(){
@@ -834,6 +856,8 @@ function reloadIntent(){
   showStatus(data)
   showColChart()
   updateFromCamera()
+  window.resizeTo(2016,969)
+  updateChart()
 }
 
 function updateFromCamera(){
@@ -849,7 +873,7 @@ function updateFromCamera(){
 }
 
 
-reloadIntent()
+
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("mydiv"));
@@ -944,21 +968,24 @@ window.onload = () => addZoom("zoomC");
 
 
 
-// {
-// $('.image-upload-wrap').bind('dragover', function () {
-//       $('.image-upload-wrap').addClass('image-dropping');
-//     });
-//     $('.image-upload-wrap').bind('dragleave', function () {
-//       $('.image-upload-wrap').removeClass('image-dropping');
-// });
-// }
+/* {
+$('.image-upload-wrap').bind('dragover', function () {
+      $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+      $('.image-upload-wrap').removeClass('image-dropping');
+});
+} */
 
 
 // setInterval(pageReload,300000)
 
-
+function clearDirectRes(){
+  document.getElementById("custom-res").style.display="none"
+}
 
 function changeDirect(direcRes){
+  document.getElementById("custom-res").style.display="block"
   if (direcRes=== "healthy"){
     document.getElementById("custom-res").innerHTML=`<span style="color:#15824B">Healthy</span>`
   }
@@ -995,6 +1022,7 @@ function changeDirect(direcRes){
 async function testDirect(){
   const inputFile = document.getElementById('input-img').files[0]
   if (inputFile) {
+    if (testing===0){
       const formdata = new FormData();
       formdata.append('file', inputFile, inputFile.name); 
       const res = await fetch('http://192.168.21.245:8000/classfication/', {
@@ -1005,9 +1033,11 @@ async function testDirect(){
       });
       data1 = await res.json();
       console.log(data1);
+    }
+      
 
       // continue here
-      direcRes("healthy")
+      changeDirect("healthy")
 
   }
   else console.log('Empty file input')
@@ -1043,23 +1073,28 @@ async function postRec(){
 
 
 async function getClassRes(){
-  // const res = await fetch('http://192.168.152.219:8000/remote-classification/',{
-  //   method:'GET',
-  // });
-  // const convData = await res.json()
+  let convData
+  if (testing===0){
+  const res = await fetch('http://192.168.152.219:8000/remote-classification/',{
+    method:'GET',
+  });
+  convData = await res.json()
 
-  // console.log('res',convData['Class'])
-  // console.log('api data: ',(convData['Img']))
+  /* console.log('res',convData['Class'])
+  console.log('api data: ',(convData['Img']))
   
-  // document.getElementById('img-get').src=`data:image/png;base64,${convData['Img']}`
-  // data[0].src=`data:image/png;base64,${convData['Img']}`
+  document.getElementById('img-get').src=`data:image/png;base64,${convData['Img']}`
+  data[0].src=`data:image/png;base64,${convData['Img']}`
   
-  // document.getElementById('1').src=`data:image/png;base64,${convData['Img']}`
-
-  let convData = {
-    Class:"healthy",
-    Img:"https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/h/h/hh_1__1.png"
+  document.getElementById('1').src=`data:image/png;base64,${convData['Img']}` */
   }
+  else{
+    convData = {
+      Class:"cbb",
+      Img:"https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/h/h/hh_1__1.png"
+    }
+  }
+  
 
   cameraSource = convData['Img']
 
@@ -1084,22 +1119,19 @@ async function getClassRes(){
 
   console.log("test data:",data)
 
-  // let showImg = document.getElementById('1')
-  // showImg.addEventListener('click',function(e){zoomSection(`${showImg.src}`,"1")})
-  // working here
+  /* let showImg = document.getElementById('1')
+  showImg.addEventListener('click',function(e){zoomSection(`${showImg.src}`,"1")})
+  working here
 
-  // document.getElementById('1').onclick=`zoomSection("${showImg.src}","1")`
+  document.getElementById('1').onclick=`zoomSection("${showImg.src}","1")`
   
-  // console.log('convert data: ',btoa(convData['Img'])) 
+  console.log('convert data: ',btoa(convData['Img'])) 
 
-  // const delay = ms => new Promise(res => setTimeout(res, ms));
+  const delay = ms => new Promise(res => setTimeout(res, ms));
   
-  // document.getElementById('img-get').src=`data:image/png;base64,${btoa(convData['img'])}`
+  document.getElementById('img-get').src=`data:image/png;base64,${btoa(convData['img'])}` */
   console.log("image change")
 }
-
-
-
 
 
 function testCall(){
@@ -1107,3 +1139,7 @@ function testCall(){
 }
 
 
+//call first time
+pageReload()
+//test reload button
+// reloadIntent()
